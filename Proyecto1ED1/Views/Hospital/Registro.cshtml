@@ -104,6 +104,24 @@
         </div>
 
         <div class="form-group">
+            @Html.LabelFor(model => model.Caracteristica, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div id="checkboxes1" style="display:inline-block">
+                    <input type="checkbox" id="Caracteristica" name="Caracteristica" value="RecienNacido">
+                    <label for="Caracteristica"> Recien Nacido </label><br>
+                    <input type="checkbox" id="Caracteristica" name="Caracteristica" value="Ninio_Joven">
+                    <label for="Caracteristica"> Niño/Joven </label><br>
+                </div>
+                <div id="checkboxes1" style="display:inline-block">
+                    <input type="checkbox" id="Caracteristica" name="Caracteristica" value="Adulto">
+                    <label for="Caracteristica"> Adulto </label><br>
+                    <input type="checkbox" id="Caracteristica" name="Caracteristica" value="3eraEdad">
+                    <label for="Caracteristica"> 3era edad </label><br>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Registrar" class="btn btn-default" />
             </div>

@@ -26,6 +26,7 @@ namespace Proyecto1ED1.Controllers
         {
             PatientInfo newPatient = new PatientInfo();
             string hospitalCorrespondiente = "";
+            int prioridad = 0;
 
             newPatient.Nombre = collection["Nombre"];
             newPatient.Apellido = collection["Apellido"];
@@ -35,6 +36,7 @@ namespace Proyecto1ED1.Controllers
             newPatient.Contagio = collection["Contagio"];
             newPatient.Sintomas = collection["Sintomas"];
             newPatient.Categoria = collection["Categoria"];
+            newPatient.Caracteristica = collection["Caracteristica"];
 
             #region Hospital Correspondiente
             if ((collection["Departamento"] == "Guatemala") || (collection["Departamento"]=="BajaVerapaz")|| (collection["Departamento"] == "Chimaltenango")|| (collection["Departamento"] == "ElProgreso"))
@@ -56,6 +58,17 @@ namespace Proyecto1ED1.Controllers
             if((collection["Departamento"] == "Jalapa")|| (collection["Departamento"] == "Jutiapa")|| (collection["Departamento"] == "Chiquimula")|| (collection["Departamento"] == "Zacapa"))
             {
                 hospitalCorrespondiente = "Oriente";
+            }
+            #endregion
+
+            #region Definicion de prioridad
+            if((collection["Caracteristica"]=="3eraEdad")|| (collection["Caracteristica"] == "RecienNacido"))
+            {
+                prioridad = 5;
+            }
+            if((collection["Caracteristica"] == "Ninio_Joven")|| (collection["Caracteristica"] == "Adulto"))
+            {
+                prioridad = 3;
             }
             #endregion
 

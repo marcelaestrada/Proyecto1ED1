@@ -15,5 +15,6 @@ namespace Proyecto1ED1.Models
         public string Sintomas { get; set; }
         public string Contagio { get; set; }
         public string Categoria { get; set; }
+        public string Caracteristica { get; set; }
     }
 }
