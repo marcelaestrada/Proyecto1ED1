@@ -61,15 +61,10 @@ namespace Proyecto1ED1.Controllers
             }
             #endregion
 
-            #region Definicion de prioridad
-            if((collection["Caracteristica"]=="3eraEdad")|| (collection["Caracteristica"] == "RecienNacido"))
-            {
-                prioridad = 5;
-            }
-            if((collection["Caracteristica"] == "Ninio_Joven")|| (collection["Caracteristica"] == "Adulto"))
-            {
-                prioridad = 3;
-            }
+            #region Definición de prioridad
+            //Definir si es contagiado o sospechoso
+            //Definir prioridad como la hora y fecha de ingreso
+            //Asignarse a la cola de prioridad correspondiente al hospital correspondiente (puede ser a la de contagiados o sospechosos)
             #endregion
 
             return View("Index");

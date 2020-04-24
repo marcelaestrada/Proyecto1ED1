@@ -126,8 +126,10 @@
     </Compile>
     <Compile Include="Models\Enums\Categoria.cs" />
     <Compile Include="Models\Enums\Departamentos.cs" />
+    <Compile Include="Models\Model\Hospital.cs" />
     <Compile Include="Models\Model\PatientInfo.cs" />
     <Compile Include="Models\Enums\PosibleContagio.cs" />
+    <Compile Include="Models\Model\PrioridadCola.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -168,6 +170,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Helpers\Storage\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
