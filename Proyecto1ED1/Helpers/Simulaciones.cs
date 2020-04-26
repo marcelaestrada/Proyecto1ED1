@@ -27,7 +27,7 @@ namespace Proyecto1ED1
         }
         /// <summary>
         /// Convierte el string de Contagio en un entero 
-        /// equivalente al porcentage qe indica el función 
+        /// equivalente al porcentage qe indica la función 
         /// de simulación solicitada en el proyecto.
         /// 5, 10 , 15 o 30.
         /// </summary>

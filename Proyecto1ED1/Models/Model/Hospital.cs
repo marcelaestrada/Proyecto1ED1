@@ -2,14 +2,19 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using CustomGenerics.Structures;
 
 namespace Proyecto1ED1.Models.Model
 {
     public class Hospital
     {
-        int prioridad { get; set; }
-        //lista de 10 camillas o hash de 10 camillas
-        //cola de prioridad para contagiados (definir tamaño)
-        //cola de prioridad para pacientes (definir tamaño)
+        /// <summary>
+        /// Prueba para evaluar funcionamiento de hashtable con ese formato
+        /// </summary>
+
+        public int contagiadosCamilla;
+        public HashTable<long,PrioridadCola> camillas = new HashTable<long,PrioridadCola>(10);
+        public PriorityQueue<PrioridadCola> colaContagiados = new PriorityQueue<PrioridadCola>();
+        public PriorityQueue<PrioridadCola> colaSospechosos = new PriorityQueue<PrioridadCola>();
     }
 }
