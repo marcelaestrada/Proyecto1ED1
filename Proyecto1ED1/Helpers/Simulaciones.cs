@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using Proyecto1ED1.Models;
+using CustomGenerics.Interfaces;
+
 
 namespace Proyecto1ED1
 {
