@@ -30,11 +30,11 @@ namespace Proyecto1ED1.Controllers
 
             newPatient.Nombre = collection["Nombre"];
             newPatient.Apellido = collection["Apellido"];
-            newPatient.DPI_Partida = Convert.ToInt32(collection["DPI_Partida"]);
+            newPatient.DPI_Partida = long.Parse(collection["DPI_Partida"]);
             newPatient.Departamento = collection["Departamento"];
             newPatient.Municipio = collection["Municipio"];
-            newPatient.Contagio = collection["Contagio"];
             newPatient.Sintomas = collection["Sintomas"];
+            newPatient.Contagio = collection["Contagio"];
             newPatient.Categoria = collection["Categoria"];
             newPatient.Caracteristica = collection["Caracteristica"];
 
