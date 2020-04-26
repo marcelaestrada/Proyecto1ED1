@@ -5,9 +5,16 @@ using System.Web;
 
 namespace Proyecto1ED1.Models.Model
 {
-    public class PrioridadCola
+    public class PrioridadCola : IComparable
     {
-        //definir datos que iran en la cola de prioridad (puede ser nombre, apellido y dpi) 
-        //definir la prioridad (categoria, ubicacion y fecha/hora de ingreso) 
+        int prioridad { get; set; }
+        string nombre { get; set; }
+        string apellido { get; set; }
+        long dpi { get; set; }
+
+        int IComparable.CompareTo(object obj)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

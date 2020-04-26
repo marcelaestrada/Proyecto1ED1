@@ -7,6 +7,7 @@ namespace Proyecto1ED1.Models.Model
 {
     public class Hospital
     {
+        int prioridad { get; set; }
         //lista de 10 camillas o hash de 10 camillas
         //cola de prioridad para contagiados (definir tamaño)
         //cola de prioridad para pacientes (definir tamaño)
