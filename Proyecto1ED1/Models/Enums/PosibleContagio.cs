@@ -7,7 +7,10 @@ namespace Proyecto1ED1.Models
 {
     public enum PosibleContagio
     {
+        ReunionConSospechosos,
         Viaje,
-        ContactoInfectado,
+        ConocidoContagiado,
+        FamiliarContagiado,
+
     }
 }

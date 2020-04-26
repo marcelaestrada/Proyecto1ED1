@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using Proyecto1ED1.Models;
 
 namespace Proyecto1ED1.Models
 {

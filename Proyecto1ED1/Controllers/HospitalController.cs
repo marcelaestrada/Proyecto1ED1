@@ -28,6 +28,8 @@ namespace Proyecto1ED1.Controllers
             string hospitalCorrespondiente = "";
             int prioridad = 0;
 
+          
+
             newPatient.Nombre = collection["Nombre"];
             newPatient.Apellido = collection["Apellido"];
             newPatient.DPI_Partida = long.Parse(collection["DPI_Partida"]);
