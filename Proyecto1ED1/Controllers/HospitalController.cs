@@ -6,7 +6,6 @@ using System.Web.Mvc;
 using Proyecto1ED1.Models;
 using Proyecto1ED1.Models.Model;
 using Proyecto1ED1.Helpers;
-using CustomGenerics.Interfaces;
 
 namespace Proyecto1ED1.Controllers
 {
@@ -83,12 +82,12 @@ namespace Proyecto1ED1.Controllers
                 }
                 else
                 {
-                    hospitalCorrespondiente.colaContagiados.Insert(infoCola.prioridad, infoCola.nombre, infoCola.apellido, infoCola.prioridad);
+                    hospitalCorrespondiente.colaContagiados.Insert(infoCola.prioridad, infoCola);
                 }
             }
             else if (newPatient.Categoria == "Sospechoso")
             {
-                hospitalCorrespondiente.colaSospechosos.Insert(infoCola.prioridad, infoCola.nombre, infoCola.apellido, infoCola.prioridad);
+                hospitalCorrespondiente.colaSospechosos.Insert(infoCola.prioridad, infoCola);
             }
             #endregion
 
