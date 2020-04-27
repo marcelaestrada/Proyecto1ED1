@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using Proyecto1ED1.Models;
+using Proyecto1ED1.Models.Model;
 
 namespace Proyecto1ED1
 {
     static class Simulaciones
     {
+        static Cama camas = new Cama();
         static Random rdm = new Random();
 
         /// <summary>
