@@ -17,116 +17,117 @@
     {
         @Html.AntiForgeryToken()
 
-    <div class="form-horizontal">
-        <h2>Registro de pacientes</h2>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.Nombre, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Nombre, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Nombre, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Apellido, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Apellido, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Apellido, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.DPI_Partida, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.DPI_Partida, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.DPI_Partida, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Departamento, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownListFor(model => model.Departamento, new SelectList(Enum.GetValues(typeof(Departamentos))),
-                "Seleccione departamento", new { @class = "form-control" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Municipio, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Municipio, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Municipio, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Sintomas, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <div id="checkboxes1" style="display:inline-block">
-                    <input type="checkbox" id="Sintomas" name="Sintomas" value="Fiebre">
-                    <label for="Sintomas"> Fiebre </label><br>
-                    <input type="checkbox" id="Sintomas" name="Sintomas" value="Cansancio">
-                    <label for="Sintomas"> Cansancio </label><br>
-                    <input type="checkbox" id="Sintomas" name="Sintomas" value="TosSeca">
-                    <label for="Sintomas"> Tos seca </label><br>
-                    <input type="checkbox" id="Sintomas" name="Sintomas" value="DoloresMolestias">
-                    <label for="Sintomas"> Dolores y molestias </label><br>
-                </div>
-                <div id="checkboxes1" style="display:inline-block">
-                    <input type="checkbox" id="Sintomas" name="Sintomas" value="CongestionNasal">
-                    <label for="Sintomas"> Congestion nasal </label><br>
-                    <input type="checkbox" id="Sintomas" name="Sintomas" value="SecrecionNasal">
-                    <label for="Sintomas"> Secrecion nasal </label><br>
-                    <input type="checkbox" id="Sintomas" name="Sintomas" value="DolorGarganta">
-                    <label for="Sintomas"> Dolor de garganta </label><br>
-                    <input type="checkbox" id="Sintomas" name="Sintomas" value="Diarrea">
-                    <label for="Sintomas"> Diarrea </label><br>
+        <div class="form-horizontal">
+            <h2>Registro de pacientes</h2>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(model => model.Nombre, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Nombre, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Nombre, "", new { @class = "text-danger" })
                 </div>
             </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Contagio, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownListFor(model => model.Contagio, new SelectList(Enum.GetValues(typeof(PosibleContagio))),
-                "Seleccione posible causa", new { @class = "form-control" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Categoria, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownListFor(model => model.Categoria, new SelectList(Enum.GetValues(typeof(Categoria))),
-                "Seleccione categoria", new { @class = "form-control" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Caracteristica, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <div id="checkboxes1" style="display:inline-block">
-                    <input type="checkbox" id="Caracteristica" name="Caracteristica" value="RecienNacido">
-                    <label for="Caracteristica"> Recien Nacido </label><br>
-                    <input type="checkbox" id="Caracteristica" name="Caracteristica" value="Ninio_Joven">
-                    <label for="Caracteristica"> Niño/Joven </label><br>
-                </div>
-                <div id="checkboxes1" style="display:inline-block">
-                    <input type="checkbox" id="Caracteristica" name="Caracteristica" value="Adulto">
-                    <label for="Caracteristica"> Adulto </label><br>
-                    <input type="checkbox" id="Caracteristica" name="Caracteristica" value="3eraEdad">
-                    <label for="Caracteristica"> 3era edad </label><br>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Apellido, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Apellido, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Apellido, "", new { @class = "text-danger" })
                 </div>
             </div>
-        </div>
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Registrar" class="btn btn-default" />
+            <div class="form-group">
+                @Html.LabelFor(model => model.DPI_Partida, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.DPI_Partida, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.DPI_Partida, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Departamento, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(model => model.Departamento, new SelectList(Enum.GetValues(typeof(Departamentos))),
+                    "Seleccione departamento", new { @class = "form-control" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Municipio, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Municipio, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Municipio, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Sintomas, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <div id="checkboxes1" style="display:inline-block">
+                        <input type="checkbox" id="Sintomas" name="Sintomas" value="Fiebre">
+                        <label for="Sintomas"> Fiebre </label><br>
+                        <input type="checkbox" id="Sintomas" name="Sintomas" value="Cansancio">
+                        <label for="Sintomas"> Cansancio </label><br>
+                        <input type="checkbox" id="Sintomas" name="Sintomas" value="TosSeca">
+                        <label for="Sintomas"> Tos seca </label><br>
+                        <input type="checkbox" id="Sintomas" name="Sintomas" value="DoloresMolestias">
+                        <label for="Sintomas"> Dolores y molestias </label><br>
+                    </div>
+                    <div id="checkboxes1" style="display:inline-block">
+                        <input type="checkbox" id="Sintomas" name="Sintomas" value="CongestionNasal">
+                        <label for="Sintomas"> Congestion nasal </label><br>
+                        <input type="checkbox" id="Sintomas" name="Sintomas" value="SecrecionNasal">
+                        <label for="Sintomas"> Secrecion nasal </label><br>
+                        <input type="checkbox" id="Sintomas" name="Sintomas" value="DolorGarganta">
+                        <label for="Sintomas"> Dolor de garganta </label><br>
+                        <input type="checkbox" id="Sintomas" name="Sintomas" value="Diarrea">
+                        <label for="Sintomas"> Diarrea </label><br>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Contagio, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(model => model.Contagio, new SelectList(Enum.GetValues(typeof(PosibleContagio))),
+                    "Seleccione posible causa", new { @class = "form-control" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Categoria, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(model => model.Categoria, new SelectList(Enum.GetValues(typeof(Categoria))),
+                    "Seleccione categoria", new { @class = "form-control" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Caracteristica, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <div id="checkboxes1" style="display:inline-block">
+                        <input type="checkbox" id="Caracteristica" name="Caracteristica" value="RecienNacido">
+                        <label for="Caracteristica"> Recien Nacido </label><br>
+                        <input type="checkbox" id="Caracteristica" name="Caracteristica" value="Ninio_Joven">
+                        <label for="Caracteristica"> Niño/Joven </label><br>
+                    </div>
+                    <div id="checkboxes1" style="display:inline-block">
+                        <input type="checkbox" id="Caracteristica" name="Caracteristica" value="Adulto">
+                        <label for="Caracteristica"> Adulto </label><br>
+                        <input type="checkbox" id="Caracteristica" name="Caracteristica" value="3eraEdad">
+                        <label for="Caracteristica"> 3era edad </label><br>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Registrar" class="btn btn-default" />
+                </div>
             </div>
         </div>
-    </div>
     }
 </body>
 </html>
+

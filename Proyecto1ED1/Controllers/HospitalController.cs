@@ -21,6 +21,14 @@ namespace Proyecto1ED1.Controllers
         {
             return View();
         }
+        public ActionResult Simulaciones()
+        {
+            return View();
+        }
+        public ActionResult Estadisticas()
+        {
+            return View();
+        }
         #endregion 
 
         [HttpPost]
@@ -108,6 +116,10 @@ namespace Proyecto1ED1.Controllers
             long prioridad = long.Parse(anio.ToString() + mes.ToString() + dia.ToString() + hora.ToString() + minutos.ToString() + segundo.ToString());
 
             return prioridad;
+        }
+        public ActionResult Simulacion()
+        {
+            return View("Simulaciones");
         }
     }
 }

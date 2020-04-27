@@ -16,7 +16,7 @@ namespace Proyecto1ED1
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Hospital", action = "Registro", id = UrlParameter.Optional }
+                defaults: new { controller = "Hospital", action = "Index", id = UrlParameter.Optional }
             );
         }
     }
