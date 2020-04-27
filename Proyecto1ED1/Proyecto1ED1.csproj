@@ -127,6 +127,7 @@
     <Compile Include="Helpers\Storage.cs" />
     <Compile Include="Models\Enums\Categoria.cs" />
     <Compile Include="Models\Enums\Departamentos.cs" />
+    <Compile Include="Models\Model\Cama.cs" />
     <Compile Include="Models\Model\Hospital.cs" />
     <Compile Include="Models\Model\PatientInfo.cs" />
     <Compile Include="Models\Enums\PosibleContagio.cs" />

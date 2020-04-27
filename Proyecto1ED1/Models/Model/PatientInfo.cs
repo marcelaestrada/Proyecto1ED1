@@ -6,7 +6,7 @@ using Proyecto1ED1.Models;
 
 namespace Proyecto1ED1.Models
 {
-    public class PatientInfo
+    public class PatientInfo : IComparable
     {
         public string Nombre { get; set; }
         public string Apellido { get; set; }
@@ -17,5 +17,10 @@ namespace Proyecto1ED1.Models
         public string Contagio { get; set; }
         public string Categoria { get; set; }
         public string Caracteristica { get; set; }
+
+        public int CompareTo(object obj)
+        {
+            return DPI_Partida.CompareTo(obj);
+        }
     }
 }
