@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using Proyecto1ED1.Models;
 using Proyecto1ED1.Models.Model;
+using CustomGenerics.Structures;
 
 namespace Proyecto1ED1
 {
@@ -59,6 +60,17 @@ namespace Proyecto1ED1
         }
 
      
+        static void AsignacionDeCama(HashTable<string, Cama> camas, PatientInfo paciente)
+        {
+            if (camas.datos<10)
+            {
+
+            }
+            else
+            {
+                //Response.Write("<script>alert('No hay suficientes Camas, por favor espere...')</script>");
+            }
+        }
 
     }
 }

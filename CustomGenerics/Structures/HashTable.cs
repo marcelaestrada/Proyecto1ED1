@@ -13,9 +13,11 @@ namespace CustomGenerics.Structures
         //ListArray. 
         List<T>[] dataArray;
         int arrayLength;
+        public int datos;
 
         public HashTable(int arrayLength)
         {
+            this.datos = 0;
             this.arrayLength = arrayLength;
             dataArray = new List<T>[arrayLength];
 
@@ -39,6 +41,7 @@ namespace CustomGenerics.Structures
 
         public void Insert(S key, T value)
         {
+            datos++;
             if (!KeyExist(key))
             {
                 int arrayIndex = Hash(key.ToString());
@@ -51,6 +54,7 @@ namespace CustomGenerics.Structures
 
         public void Delete(S key)
         {
+            datos--;
             int arrayIndex = Hash(key.ToString());
 
             foreach (var item in dataArray[arrayIndex])
