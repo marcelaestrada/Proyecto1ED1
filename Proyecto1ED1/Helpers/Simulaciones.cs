@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using Proyecto1ED1.Models;
+using CustomGenerics.Structures;
 
 namespace Proyecto1ED1
 {
     static class Simulaciones
     {
+        
         static Random rdm = new Random();
 
         /// <summary>
@@ -55,7 +57,8 @@ namespace Proyecto1ED1
             }
             return retorno;
         }
-    
-        
+
+     
+
     }
 }

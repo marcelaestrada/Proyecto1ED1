@@ -129,6 +129,7 @@
     <Compile Include="Models\Enums\Categoria.cs" />
     <Compile Include="Models\Enums\Departamentos.cs" />
     <Compile Include="Models\Model\Hospital.cs" />
+    <Compile Include="Models\Model\CamaHospital.cs" />
     <Compile Include="Models\Model\PatientInfo.cs" />
     <Compile Include="Models\Enums\PosibleContagio.cs" />
     <Compile Include="Models\Model\PrioridadCola.cs" />
@@ -287,6 +288,12 @@
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="Scripts\index.d.ts" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CustomGenerics\CustomGenerics.csproj">
+      <Project>{403adfe9-d600-4871-a635-f69dd8ac38bc}</Project>
+      <Name>CustomGenerics</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
