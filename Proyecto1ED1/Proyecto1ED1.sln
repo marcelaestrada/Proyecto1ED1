@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.29806.167
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Proyecto1ED1", "Proyecto1ED1.csproj", "{592785E8-98DD-4C60-9732-672CBAD0C4F0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomGenerics", "..\..\..\Laboratorio4ED1\CustomGenerics\CustomGenerics.csproj", "{403ADFE9-D600-4871-A635-F69DD8AC38BC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomGenerics", "..\CustomGenerics\CustomGenerics.csproj", "{403ADFE9-D600-4871-A635-F69DD8AC38BC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
