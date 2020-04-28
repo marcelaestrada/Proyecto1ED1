@@ -8,7 +8,7 @@ namespace CustomGenerics.Structures
 {
     public class Node<T>
     {
-        public string value { get; set; }
-        public int priority { get; set; }
+        public T value { get; set; }
+        public long priority { get; set; }
     }
 }

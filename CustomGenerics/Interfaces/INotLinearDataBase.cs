@@ -9,7 +9,7 @@ namespace CustomGenerics.Interfaces
 {
     public interface INotLinearDataBase<T>
     {
-        void Insert(int priority, string data);
-        string Delete();
+        void Insert(long priority, T data);
+        T Delete();
     }
 }

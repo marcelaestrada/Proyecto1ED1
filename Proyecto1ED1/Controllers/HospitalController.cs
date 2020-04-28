@@ -87,16 +87,15 @@ namespace Proyecto1ED1.Controllers
                 {
                     hospitalCorrespondiente.contagiadosCamilla++;
                     //hospitalCorrespondiente.camillas.Insert(infoCola.prioridad, infoCola);
-                    //hospitalCorrespondiente.
                 }
                 else
                 {
-                    //hospitalCorrespondiente.colaContagiados.Insert(infoCola.prioridad, infoCola);
+                    hospitalCorrespondiente.colaContagiados.Insert(infoCola.prioridad, infoCola);
                 }
             }
             else if (newPatient.Categoria == "Sospechoso")
             {
-                //hospitalCorrespondiente.colaSospechosos.Insert(infoCola.prioridad, infoCola);
+                hospitalCorrespondiente.colaSospechosos.Insert(infoCola.prioridad, infoCola);
             }
             #endregion
 

@@ -33,37 +33,37 @@ namespace CustomGenerics.Structures
             return (x * 2) + 2;
         }
 
-        void maxHeap(int x)
+        void minHeap(int x)
         {
             int nleft = left(x);
             int nright = right(x);
             int h = x;
 
-            if ((nleft <= size) && (priorityQueue[h].priority < priorityQueue[nleft].priority))
+            if ((nleft <= size) && (priorityQueue[h].priority > priorityQueue[nleft].priority))
             {
                 h = nleft;
             }
-            if ((nright <= size) && priorityQueue[h].priority < priorityQueue[nright].priority)
+            if ((nright <= size) && priorityQueue[h].priority > priorityQueue[nright].priority)
             {
                 h = nright;
             }
             if (h != x)
             {
                 change(h, x);
-                maxHeap(h);
+                minHeap(h);
             }
         }
 
-        void heapMax(int x)
+        void heapMin(int x)
         {
-            while ((x >= 0) && (priorityQueue[reverseEquation(x)].priority < priorityQueue[x].priority))
+            while ((x >= 0) && (priorityQueue[reverseEquation(x)].priority > priorityQueue[x].priority))
             {
                 change(x, reverseEquation(x));
                 x = reverseEquation(x);
             }
         }
 
-        void Inserting(int p, string data)
+        void Inserting(long p, T data)
         {
             if (size == 1)
             {
@@ -76,43 +76,43 @@ namespace CustomGenerics.Structures
 
             priorityQueue.Add(newNode);
             size++;
-            heapMax(size);
+            heapMin(size);
         }
 
         
-        string Deleting()
+        T Deleting()
         {
             if (size > -1)
             {
-                string data = priorityQueue[0].value;
+                T data = priorityQueue[0].value;
                 priorityQueue[0] = priorityQueue[size];
                 priorityQueue.RemoveAt(size);
                 size--;
-                maxHeap(0);
+                minHeap(0);
                 return data;
             }
             else
             {
-                return "No hay tareas pendientes";
+                return priorityQueue[0].value;
             }
         }
 
-        public void Insert(int value, string data)
+        public void Insert(long value, T data)
         {
             Inserting(value, data);
         }
 
-        public string Delete()
+        public T Delete()
         {
             return Deleting();
         }
 
-        public string Peek()
+        public T Peek()
         {
             if (size > -1)
                 return priorityQueue[0].value;
             else
-                return "No hay tareas pendientes";
+                return priorityQueue[0].value;
         }
 
         public List<Node<T>> CopyOfData()
