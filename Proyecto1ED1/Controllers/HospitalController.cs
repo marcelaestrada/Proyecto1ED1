@@ -35,7 +35,7 @@ namespace Proyecto1ED1.Controllers
         public ActionResult Registro(FormCollection collection)
         {
             PatientInfo newPatient = new PatientInfo();
-            Hospital hospitalCorrespondiente = new Hospital();
+            Hospital hospitalCorrespondiente = new Hospital("Hospital");
             PrioridadCola infoCola = new PrioridadCola();
 
             #region Informacion de registro de paciente
@@ -61,6 +61,7 @@ namespace Proyecto1ED1.Controllers
             if ((collection["Departamento"] == "Guatemala") || (collection["Departamento"]=="BajaVerapaz")|| (collection["Departamento"] == "Chimaltenango")|| (collection["Departamento"] == "ElProgreso"))
             {
                 hospitalCorrespondiente = Storage.Instance.hospitalCapital;
+               
             }
             if((collection["Departamento"] == "Quetzaltenango")|| (collection["Departamento"] == "SanMarcos")|| (collection["Departamento"] == "Retalhuleu")|| (collection["Departamento"] == "Totonicapan")|| (collection["Departamento"] == "Solola"))
             {
@@ -86,7 +87,7 @@ namespace Proyecto1ED1.Controllers
                 if (hospitalCorrespondiente.contagiadosCamilla < 10)
                 {
                     hospitalCorrespondiente.contagiadosCamilla++;
-                    //hospitalCorrespondiente.camillas.Insert(infoCola.prioridad, infoCola);
+                   // hospitalCorrespondiente.camillas.Insert(infoCola.prioridad, infoCola);
                 }
                 else
                 {

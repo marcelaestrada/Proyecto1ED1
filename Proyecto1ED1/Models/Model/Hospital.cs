@@ -13,16 +13,21 @@ namespace Proyecto1ED1.Models.Model
         /// </summary>
         public string Nombre { get; set; }
         public int contagiadosCamilla;
-        public HashTable<string, Cama> camillas = new HashTable<string, Cama>(10);
-        public PriorityQueue<PrioridadCola> colaContagiados = new PriorityQueue<PrioridadCola>();
-        public PriorityQueue<PrioridadCola> colaSospechosos = new PriorityQueue<PrioridadCola>();
+        public HashTable<string, Cama> camillas;
+        public PriorityQueue<PrioridadCola> colaContagiados;
+        public PriorityQueue<PrioridadCola> colaSospechosos;
 
         //Guardar las camas que están disponibles. 
         public List<Cama> CamillasDisponibles = new List<Cama>();
 
 
-        public Hospital()
+        public Hospital(string NombreHospital)
         {//Crear las 10 camas e incertarlas con su codigo y numero a la hashtable. 
+            this.Nombre = NombreHospital;
+            this.camillas = new HashTable<string, Cama>(10);
+            this.colaContagiados = new PriorityQueue<PrioridadCola>();
+            this.colaSospechosos = new PriorityQueue<PrioridadCola>();
+
             for (int i = 0; i < 10; i++)
             {
                 Cama nuevaCama = new Cama(this.Nombre, i + 1);

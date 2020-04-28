@@ -20,10 +20,10 @@ namespace Proyecto1ED1.Helpers
             }
         }
 
-        public Hospital hospitalCapital = new Hospital();
-        public Hospital hospitalQuetzaltenango = new Hospital();
-        public Hospital hospitalPeten = new Hospital();
-        public Hospital hospitalEscuintla = new Hospital();
-        public Hospital hospitalOriente = new Hospital();
+        public Hospital hospitalCapital = new Hospital("Hospital Capital");
+        public Hospital hospitalQuetzaltenango = new Hospital("Hospital Quetzaltenango");
+        public Hospital hospitalPeten = new Hospital("Hospital Peten");
+        public Hospital hospitalEscuintla = new Hospital("Hospital Escuintla");
+        public Hospital hospitalOriente = new Hospital("Hospital Oriente");
     }
 }
