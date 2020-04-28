@@ -54,7 +54,7 @@ namespace Proyecto1ED1.Controllers
             infoCola.nombre = newPatient.Nombre;
             infoCola.apellido = newPatient.Apellido;
             infoCola.dpi = newPatient.DPI_Partida;
-            infoCola.prioridad = definirPrioridad();
+            infoCola.prioridad = definirPrioridad(newPatient.Caracteristica);
             #endregion
 
             #region Definicion de hospital correspondiente
@@ -102,18 +102,80 @@ namespace Proyecto1ED1.Controllers
             return View("Registro");
         }
 
-        public long definirPrioridad()
+        public long definirPrioridad(string categoria)
         {
+            ///Definicion por categoria
+            double porCategoria = 0.0;
+
+            if(categoria=="3eraEdad")
+            {
+                porCategoria = 0.0;
+            }
+            if (categoria == "RecienNacido")
+            {
+                porCategoria = 0.1;
+            }
+            if (categoria == "Adulto")
+            {
+                porCategoria = 0.2;
+            }
+            if(categoria== "Ninio_Joven")
+            {
+                porCategoria = 0.3;
+            }
+
             ///Definicion de fecha y hora de registro de paciente 
-            int hora = DateTime.Now.Hour;
-            int minutos = DateTime.Now.Minute;
-            int segundo = DateTime.Now.Second;
-            int dia = DateTime.Now.Day;
-            int mes = DateTime.Now.Month;
-            int anio = DateTime.Now.Year;
+
+            int hora;
+            int minutos;
+            int segundo;
+            int dia;
+            int mes;
+            int anio=DateTime.Now.Year;
+
+            if (DateTime.Now.Hour < 10)
+            {
+                hora = int.Parse(0.ToString() + DateTime.Now.Hour.ToString());
+            }
+            else 
+            {
+                hora = DateTime.Now.Hour;
+            } 
+            if (DateTime.Now.Minute < 10)
+            {
+                minutos = int.Parse(0.ToString() + DateTime.Now.Minute.ToString());
+            }
+            else
+            {
+                minutos = DateTime.Now.Minute;
+            }
+            if (DateTime.Now.Second < 10)
+            {
+                segundo = int.Parse(0.ToString() + DateTime.Now.Second.ToString());
+            }
+            else
+            {
+                segundo = DateTime.Now.Second;
+            }
+            if (DateTime.Now.Day < 10)
+            {
+                dia = int.Parse(0.ToString() + DateTime.Now.Day.ToString());
+            }
+            else
+            {
+                dia = DateTime.Now.Day;
+            }
+            if (DateTime.Now.Month < 10)
+            {
+                mes = int.Parse(0.ToString() + DateTime.Now.Month.ToString());
+            }
+            else
+            {
+                mes = DateTime.Now.Month;
+            }
 
             ///Concatenacion de fecha y hora para conseguir valor de la prioridad
-            long prioridad = long.Parse(anio.ToString() + mes.ToString() + dia.ToString() + hora.ToString() + minutos.ToString() + segundo.ToString());
+            long prioridad = long.Parse(porCategoria.ToString() + anio.ToString() + mes.ToString() + dia.ToString() + hora.ToString() + minutos.ToString() + segundo.ToString());
 
             return prioridad;
         }

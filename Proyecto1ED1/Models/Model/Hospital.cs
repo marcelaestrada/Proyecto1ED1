@@ -17,6 +17,7 @@ namespace Proyecto1ED1.Models.Model
         public PriorityQueue<PrioridadCola> colaContagiados = new PriorityQueue<PrioridadCola>();
         public PriorityQueue<PrioridadCola> colaSospechosos = new PriorityQueue<PrioridadCola>();
 
+        /*
         //Guardar las camas que están disponibles. 
         public List<Cama> CamillasDisponibles = new List<Cama>();
 
@@ -35,7 +36,7 @@ namespace Proyecto1ED1.Models.Model
             }
         }
 
-
+        
 
         private Random rdm = new Random();
 
