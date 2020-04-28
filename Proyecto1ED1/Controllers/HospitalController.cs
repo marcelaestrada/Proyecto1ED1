@@ -87,7 +87,23 @@ namespace Proyecto1ED1.Controllers
                 if (hospitalCorrespondiente.contagiadosCamilla < 10)
                 {
                     hospitalCorrespondiente.contagiadosCamilla++;
-                   // hospitalCorrespondiente.camillas.Insert(infoCola.prioridad, infoCola);
+                    
+
+                    //Encontrar primer camilla libre y sacar su código. 
+                   Cama camaDisponible = hospitalCorrespondiente.camillas.AllDataLikeList().Find((dato)=> {
+                       return (dato.Disponible)?true:false;
+                    });
+                  
+
+                    //Llamar al hashTable del hospital Correspondiente....
+                    //Hacer un search de la camilla con ese código y al objeto de retorno ingresarle el paciente.
+                    hospitalCorrespondiente.camillas.Search(camaDisponible.Codigo).PacienteActual = newPatient;
+                    hospitalCorrespondiente.camillas.Search(camaDisponible.Codigo).Disponible = false;
+
+                   // Hospital hospitalBandera = Storage.Instance.hospitalCapital;
+                 
+
+                   
                 }
                 else
                 {
@@ -175,6 +191,8 @@ namespace Proyecto1ED1.Controllers
                 mes = DateTime.Now.Month;
             }
 
+            //Para evitar System.FormatException
+            porCategoria *= 10;
             ///Concatenacion de fecha y hora para conseguir valor de la prioridad
             long prioridad = long.Parse(porCategoria.ToString() + anio.ToString() + mes.ToString() + dia.ToString() + hora.ToString() + minutos.ToString() + segundo.ToString());
 
