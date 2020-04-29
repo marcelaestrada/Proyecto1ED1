@@ -26,7 +26,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
-    <TypeScriptToolsVersion>3.8</TypeScriptToolsVersion>
+    <TypeScriptToolsVersion>3.7</TypeScriptToolsVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -128,6 +128,7 @@
     <Compile Include="Models\Enums\Categoria.cs" />
     <Compile Include="Models\Enums\Departamentos.cs" />
     <Compile Include="Models\Model\Cama.cs" />
+    <Compile Include="Models\Model\Estadisticas.cs" />
     <Compile Include="Models\Model\Hospital.cs" />
     <Compile Include="Models\Model\PatientInfo.cs" />
     <Compile Include="Models\Enums\PosibleContagio.cs" />

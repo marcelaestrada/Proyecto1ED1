@@ -1,8 +1,55 @@
-﻿@{
+﻿@using Proyecto1ED1.Models
+@model Proyecto1ED1.Models.Model.Estadisticas
+
+@{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<!DOCTYPE html>
+
+<html>
 <head>
-    <h1>Estadisticas</h1>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+        google.charts.load('current', { 'packages': ['bar'] });
+        google.charts.setOnLoadCallback(drawGraph);
+
+        function drawGraph() {
+            var data = new google.visualization.DataTable([
+                ['Categoria', 'Pacientes'],
+                ["Contagiados", 2],
+                ["Sospechosos", 3],
+                ["Sospechosos contagiados", 10],
+                ["Recuperados", 5],
+            ]);
+
+            var options = {
+                title: 'Pacientes en hospitales',
+                width: 900,
+                legend: { position: 'none' },
+                chart: {
+                    title: 'Pacientes en hospitales',
+                    subtitle: 'General'
+                },
+                bars: 'horizontal',
+                axes: {
+                    x: {
+                        0: { side: 'top', label: 'Cantidad de pacientes' }
+                    }
+                },
+                bar: { groupWidth: "90%" }
+            };
+
+            var chart = new google.charts.Bar(document.getElementById('top_x_div'));
+            chart.draw(data, options);
+        };
+    </script>
 </head>
+<body>
+    <div id="top_x_div" style="width: 900px; height: 500px;"></div>
+</body>
+</html>
+
+
+
 
