@@ -1,0 +1,39 @@
+﻿@model Proyecto1ED1.Models.Model.Hospital
+@using Proyecto1ED1.Models.Model
+
+@{
+   
+
+    ViewBag.Title = "MenuHospital";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    List<Cama> id = Model.CamasDisponibles();
+
+}
+
+<h2>MenuHospital</h2>
+
+
+!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+</head>
+<body>
+    <br />
+    <center>
+        @Html.ActionLink("Camas Disponibles", "CamasDisponibles", null, new { @class = "btn btn-outline-dark btn-lg" })
+        <br />
+        <br />
+        @Html.ActionLink("Realizar Una Prueba", "HospitalQuetzaltenango", null, new { @class = "btn btn-outline-dark btn-lg" })
+        <br />
+        <br />
+        @Html.ActionLink("Listado de contagiados", "HospitalPeten", null, new { @class = "btn btn-outline-dark btn-lg" })
+        <br />
+        <br />
+        </div>
+    </center>
+    <br />
+</body>
+</html>

@@ -285,6 +285,9 @@
     <Content Include="Views\Hospital\Simulaciones.cshtml" />
     <Content Include="tsconfig.json" />
     <Content Include="Views\Hospital\Estadisticas.cshtml" />
+    <Content Include="Views\Hospital\Hospitales.cshtml" />
+    <Content Include="Views\Hospital\MenuHospital.cshtml" />
+    <Content Include="Views\Hospital\ListaCamasDisponibles.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

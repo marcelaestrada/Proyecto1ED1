@@ -11,11 +11,19 @@ namespace Proyecto1ED1.Controllers
 {
     public class HospitalController : Controller
     {
-
+        Hospital hospitalSeleccionado = new Hospital("hospitalSeleccionado");
         #region Metodos GET
         // GET: Hospital
         public ActionResult Index()
         {
+            Storage.Instance.hospitalCapital.Nombre = "Hospital Capital";
+            Storage.Instance.hospitalQuetzaltenango.Nombre = "Hospital Quetzaltenango";
+            Storage.Instance.hospitalPeten.Nombre = "Hospital Peten";
+            Storage.Instance.hospitalEscuintla.Nombre = "Hospital Escuintla";
+            Storage.Instance.hospitalOriente.Nombre = "Hospital Oriente";
+
+
+
             return View();
         }
         public ActionResult Registro()
@@ -60,28 +68,28 @@ namespace Proyecto1ED1.Controllers
             #endregion
 
             #region Definicion de hospital correspondiente
-            if ((collection["Departamento"] == "Guatemala") || (collection["Departamento"]=="BajaVerapaz")|| (collection["Departamento"] == "Chimaltenango")|| (collection["Departamento"] == "ElProgreso"))
+            if ((collection["Departamento"] == "Guatemala") || (collection["Departamento"] == "BajaVerapaz") || (collection["Departamento"] == "Chimaltenango") || (collection["Departamento"] == "ElProgreso"))
             {
                 hospitalCorrespondiente = Storage.Instance.hospitalCapital;
                 infoEstadisticas = "Capital";
-               
+
             }
-            if((collection["Departamento"] == "Quetzaltenango")|| (collection["Departamento"] == "SanMarcos")|| (collection["Departamento"] == "Retalhuleu")|| (collection["Departamento"] == "Totonicapan")|| (collection["Departamento"] == "Solola"))
+            if ((collection["Departamento"] == "Quetzaltenango") || (collection["Departamento"] == "SanMarcos") || (collection["Departamento"] == "Retalhuleu") || (collection["Departamento"] == "Totonicapan") || (collection["Departamento"] == "Solola"))
             {
                 hospitalCorrespondiente = Storage.Instance.hospitalQuetzaltenango;
                 infoEstadisticas = "Quetzaltenango";
             }
-            if((collection["Departamento"] == "Peten")|| (collection["Departamento"] == "Quiche")|| (collection["Departamento"] == "AltaVerapaz")|| (collection["Departamento"] == "Izabal")|| (collection["Departamento"] == "Huehuetenango"))
+            if ((collection["Departamento"] == "Peten") || (collection["Departamento"] == "Quiche") || (collection["Departamento"] == "AltaVerapaz") || (collection["Departamento"] == "Izabal") || (collection["Departamento"] == "Huehuetenango"))
             {
                 hospitalCorrespondiente = Storage.Instance.hospitalPeten;
                 infoEstadisticas = "Peten";
             }
-            if((collection["Departamento"] == "Escuintla")|| (collection["Departamento"] == "Suchitepequez")|| (collection["Departamento"] == "Sacatepequez")|| (collection["Departamento"] == "SantaRosa"))
+            if ((collection["Departamento"] == "Escuintla") || (collection["Departamento"] == "Suchitepequez") || (collection["Departamento"] == "Sacatepequez") || (collection["Departamento"] == "SantaRosa"))
             {
                 hospitalCorrespondiente = Storage.Instance.hospitalEscuintla;
                 infoEstadisticas = "Escuintla";
             }
-            if((collection["Departamento"] == "Jalapa")|| (collection["Departamento"] == "Jutiapa")|| (collection["Departamento"] == "Chiquimula")|| (collection["Departamento"] == "Zacapa"))
+            if ((collection["Departamento"] == "Jalapa") || (collection["Departamento"] == "Jutiapa") || (collection["Departamento"] == "Chiquimula") || (collection["Departamento"] == "Zacapa"))
             {
                 hospitalCorrespondiente = Storage.Instance.hospitalOriente;
                 infoEstadisticas = "Oriente";
@@ -96,16 +104,20 @@ namespace Proyecto1ED1.Controllers
                 if (infoEstadisticas == "Capital")
                 {
                     Storage.Instance.datosCapital.contagiadosIngresados++;
-                }else if (infoEstadisticas == "Quetzaltenango")
+                }
+                else if (infoEstadisticas == "Quetzaltenango")
                 {
                     Storage.Instance.datosQuetzaltenango.contagiadosIngresados++;
-                }else if (infoEstadisticas == "Escuintla")
+                }
+                else if (infoEstadisticas == "Escuintla")
                 {
                     Storage.Instance.datosEscuintla.contagiadosIngresados++;
-                }else if (infoEstadisticas == "Peten")
+                }
+                else if (infoEstadisticas == "Peten")
                 {
                     Storage.Instance.datosPeten.contagiadosIngresados++;
-                }else if (infoEstadisticas == "Oriente")
+                }
+                else if (infoEstadisticas == "Oriente")
                 {
                     Storage.Instance.datosOriente.contagiadosIngresados++;
                 }
@@ -114,21 +126,22 @@ namespace Proyecto1ED1.Controllers
                 if (hospitalCorrespondiente.contagiadosCamilla < 10)
                 {
                     hospitalCorrespondiente.contagiadosCamilla++;
-                    
+
 
                     //Encontrar primer camilla libre y sacar su código. 
-                   Cama camaDisponible = hospitalCorrespondiente.camillas.AllDataLikeList().Find((dato)=> {
-                       return (dato.Disponible)?true:false;
+                    Cama camaDisponible = hospitalCorrespondiente.camillas.AllDataLikeList().Find((dato) =>
+                    {
+                        return (dato.Disponible) ? true : false;
                     });
-                  
+
 
                     //Llamar al hashTable del hospital Correspondiente....
                     //Hacer un search de la camilla con ese código y al objeto de retorno ingresarle el paciente.
                     hospitalCorrespondiente.camillas.Search(camaDisponible.Codigo).PacienteActual = newPatient;
                     hospitalCorrespondiente.camillas.Search(camaDisponible.Codigo).Disponible = false;
 
-                   // Hospital hospitalBandera = Storage.Instance.hospitalCapital;
-  
+                    // Hospital hospitalBandera = Storage.Instance.hospitalCapital;
+
                 }
                 else
                 {
@@ -173,7 +186,7 @@ namespace Proyecto1ED1.Controllers
             ///Definicion por categoria
             double porCategoria = 0.0;
 
-            if(categoria=="3eraEdad")
+            if (categoria == "3eraEdad")
             {
                 porCategoria = 0.1;
             }
@@ -185,7 +198,7 @@ namespace Proyecto1ED1.Controllers
             {
                 porCategoria = 0.3;
             }
-            if(categoria== "Ninio_Joven")
+            if (categoria == "Ninio_Joven")
             {
                 porCategoria = 0.4;
             }
@@ -197,16 +210,16 @@ namespace Proyecto1ED1.Controllers
             int segundo;
             int dia;
             int mes;
-            int anio=DateTime.Now.Year;
+            int anio = DateTime.Now.Year;
 
             if (DateTime.Now.Hour < 10)
             {
                 hora = int.Parse(0.ToString() + DateTime.Now.Hour.ToString());
             }
-            else 
+            else
             {
                 hora = DateTime.Now.Hour;
-            } 
+            }
             if (DateTime.Now.Minute < 10)
             {
                 minutos = int.Parse(0.ToString() + DateTime.Now.Minute.ToString());
@@ -251,5 +264,31 @@ namespace Proyecto1ED1.Controllers
         {
             return View("Simulaciones");
         }
+
+        public ActionResult Hospitales()
+        {
+            return View();
+        }
+
+        #region ActionResults a menu de hospitales
+
+        public ActionResult HospitalCapital()
+        {
+             this.hospitalSeleccionado = Storage.Instance.hospitalCapital;
+
+            return
+                View("MenuHospital", this.hospitalSeleccionado);
+        }
+        public ActionResult HospitalQuetzaltenango() => View("MenuHospital", Storage.Instance.hospitalQuetzaltenango);
+        public ActionResult HospitalPeten() => View("MenuHospital", Storage.Instance.hospitalPeten);
+        public ActionResult HospitalEscuintla() => View("MenuHospital", Storage.Instance.hospitalEscuintla);
+        public ActionResult HospitalOriente() => View("MenuHospital", Storage.Instance.hospitalOriente);
+        #endregion
+
+        public ActionResult CamasDisponibles()
+        {
+            return View("ListaCamasDisponibles",this.hospitalSeleccionado.CamasDisponibles());
+        }
+
     }
 }
