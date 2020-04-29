@@ -175,19 +175,19 @@ namespace Proyecto1ED1.Controllers
 
             if(categoria=="3eraEdad")
             {
-                porCategoria = 0.0;
+                porCategoria = 0.1;
             }
             if (categoria == "RecienNacido")
             {
-                porCategoria = 0.1;
+                porCategoria = 0.2;
             }
             if (categoria == "Adulto")
             {
-                porCategoria = 0.2;
+                porCategoria = 0.3;
             }
             if(categoria== "Ninio_Joven")
             {
-                porCategoria = 0.3;
+                porCategoria = 0.4;
             }
 
             ///Definicion de fecha y hora de registro de paciente 
