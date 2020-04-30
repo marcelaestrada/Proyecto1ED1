@@ -22,8 +22,6 @@ namespace Proyecto1ED1.Controllers
             Storage.Instance.hospitalEscuintla.Nombre = "Hospital Escuintla";
             Storage.Instance.hospitalOriente.Nombre = "Hospital Oriente";
 
-
-
             return View();
         }
         public ActionResult Registro()
@@ -36,7 +34,16 @@ namespace Proyecto1ED1.Controllers
         }
         public ActionResult Estadisticas()
         {
-            return View(Storage.Instance.datos);
+            Estadisticas datosEstadisticas = Storage.Instance.datos;
+            return View(datosEstadisticas);
+        }
+        public ActionResult EstadisticaGeneralHospital()
+        {
+            return View();
+        }
+        public ActionResult EstadisticaPorHospital()
+        {
+            return View();
         }
         #endregion 
 
@@ -182,9 +189,9 @@ namespace Proyecto1ED1.Controllers
             }
             #endregion
 
-            return View("Registro");
+            return View("Index");
         }
-
+        
         public long definirPrioridad(string categoria)
         {
             ///Definicion por categoria
@@ -209,6 +216,7 @@ namespace Proyecto1ED1.Controllers
 
             ///Definicion de fecha y hora de registro de paciente 
 
+            string aux = "";
             int hora;
             int minutos;
             int segundo;
@@ -218,7 +226,8 @@ namespace Proyecto1ED1.Controllers
 
             if (DateTime.Now.Hour < 10)
             {
-                hora = int.Parse(0.ToString() + DateTime.Now.Hour.ToString());
+                aux = "0" + DateTime.Now.Hour.ToString();
+                hora = Convert.ToInt32(aux);
             }
             else
             {
@@ -226,7 +235,8 @@ namespace Proyecto1ED1.Controllers
             }
             if (DateTime.Now.Minute < 10)
             {
-                minutos = int.Parse(0.ToString() + DateTime.Now.Minute.ToString());
+                aux = "0" + DateTime.Now.Minute.ToString();
+                minutos = Convert.ToInt32(aux);
             }
             else
             {
@@ -234,7 +244,8 @@ namespace Proyecto1ED1.Controllers
             }
             if (DateTime.Now.Second < 10)
             {
-                segundo = int.Parse(0.ToString() + DateTime.Now.Second.ToString());
+                aux = "0" + DateTime.Now.Second.ToString();
+                segundo = Convert.ToInt32(aux);
             }
             else
             {
@@ -242,7 +253,8 @@ namespace Proyecto1ED1.Controllers
             }
             if (DateTime.Now.Day < 10)
             {
-                dia = int.Parse(0.ToString() + DateTime.Now.Day.ToString());
+                aux = "0" + DateTime.Now.Day.ToString();
+                dia = Convert.ToInt32(aux);
             }
             else
             {
@@ -250,7 +262,8 @@ namespace Proyecto1ED1.Controllers
             }
             if (DateTime.Now.Month < 10)
             {
-                mes = int.Parse(0.ToString() + DateTime.Now.Month.ToString());
+                aux = "0" + DateTime.Now.Month.ToString();
+                mes = Convert.ToInt32(aux);
             }
             else
             {
@@ -264,6 +277,7 @@ namespace Proyecto1ED1.Controllers
 
             return prioridad;
         }
+        
         public ActionResult Simulacion()
         {
             return View("Simulaciones");
@@ -332,5 +346,31 @@ namespace Proyecto1ED1.Controllers
             }
         }
 
+        #region Estadisticas
+        [HttpPost]
+        public ActionResult Estadisticas(FormCollection collection)
+        {
+            if (collection["nombre"] == "Capital")
+            {
+                return View("EstadisticaPorHospital", (Storage.Instance.datosCapital));
+            }else if (collection["nombre"] == "Quetzaltenango")
+            {
+                return View("EstadisticaPorHospital", (Storage.Instance.datosQuetzaltenango));
+            }else if (collection["nombre"] == "Peten")
+            {
+                return View("EstadisticaPorHospital", (Storage.Instance.datosPeten));
+            }else if (collection["nombre"] == "Escuintla")
+            {
+                return View("EstadisticaPorHospital", (Storage.Instance.datosEscuintla));
+            }else if (collection["nombre"] == "Oriente")
+            {
+                return View("EstadisticaPorHospital", (Storage.Instance.datosOriente));
+            }
+            else
+            {
+                return View();
+            }
+        }
+        #endregion
     }
 }

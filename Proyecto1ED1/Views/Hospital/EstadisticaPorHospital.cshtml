@@ -5,10 +5,14 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+
 <!DOCTYPE html>
 
 <html>
 <head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+
     @using (Html.BeginForm("Estadisticas", "Hospital"))
     {
 
@@ -28,12 +32,12 @@
                 ]);
 
                 var options = {
-                    title: 'Pacientes en hospitales',
+                    title: 'Pacientes en hospital',
                     width: 900,
                     legend: { position: 'none' },
                     chart: {
-                        title: 'Pacientes en hospitales',
-                        subtitle: 'General'
+                        title: 'Pacientes en hospital',
+                        subtitle: 'Por hospital'
                     },
                     bars: 'horizontal',
                     axes: {
@@ -49,33 +53,8 @@
             };
         </script>
     }
-    </head>
+</head>
 <body>
     <div id="top_x_div" style="width: 900px; height: 500px;"></div>
-    <br />
-    <br />
-    <center>
-        <div class="botonToUsers">
-            @Html.ActionLink("Grafica general (hospitales)", "EstadisticaGeneralHospital", null, new { @class = "btn btn-primary btn-lg" })
-        </div>
-        <br />
-        <br />
-        <div class="form-group">
-            @Html.LabelFor(model => model, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownListFor(model => model.nombre, new SelectList(Enum.GetValues(typeof(Hospitales))),
-                "Seleccione hospital", new { @class = "form-control" })
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Visualizar" class="btn btn-default" />
-            </div>
-        </div>
-    </center>
 </body>
 </html>
-
-
-
-
