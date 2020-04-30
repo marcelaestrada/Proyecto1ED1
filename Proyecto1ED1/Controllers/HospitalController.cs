@@ -11,7 +11,7 @@ namespace Proyecto1ED1.Controllers
 {
     public class HospitalController : Controller
     {
-        Hospital hospitalSeleccionado = new Hospital("hospitalSeleccionado");
+       
         #region Metodos GET
         // GET: Hospital
         public ActionResult Index()
@@ -140,6 +140,10 @@ namespace Proyecto1ED1.Controllers
                     hospitalCorrespondiente.camillas.Search(camaDisponible.Codigo).PacienteActual = newPatient;
                     hospitalCorrespondiente.camillas.Search(camaDisponible.Codigo).Disponible = false;
 
+                    hospitalCorrespondiente.CamillasDisponibles = hospitalCorrespondiente.CamasDisponibles();
+                    var s = Storage.Instance.hospitalCapital;
+
+                    int flag = 0;
                     // Hospital hospitalBandera = Storage.Instance.hospitalCapital;
 
                 }
@@ -274,20 +278,58 @@ namespace Proyecto1ED1.Controllers
 
         public ActionResult HospitalCapital()
         {
-             this.hospitalSeleccionado = Storage.Instance.hospitalCapital;
+            Storage.Instance.hospitalSeleccionado = "HospitalCapital";
 
             return
-                View("MenuHospital", this.hospitalSeleccionado);
+                View("MenuHospital", Storage.Instance.hospitalCapital);
         }
-        public ActionResult HospitalQuetzaltenango() => View("MenuHospital", Storage.Instance.hospitalQuetzaltenango);
-        public ActionResult HospitalPeten() => View("MenuHospital", Storage.Instance.hospitalPeten);
-        public ActionResult HospitalEscuintla() => View("MenuHospital", Storage.Instance.hospitalEscuintla);
-        public ActionResult HospitalOriente() => View("MenuHospital", Storage.Instance.hospitalOriente);
+        public ActionResult HospitalQuetzaltenango()
+        {
+             Storage.Instance.hospitalSeleccionado = "HospitalQuetzaltenango";
+            return View("MenuHospital", Storage.Instance.hospitalQuetzaltenango);
+        }
+        public ActionResult HospitalPeten()
+        {
+            Storage.Instance.hospitalSeleccionado = "HospitalPeten";
+            return View("MenuHospital", Storage.Instance.hospitalPeten);
+        }
+        public ActionResult HospitalEscuintla()
+        {
+             Storage.Instance.hospitalSeleccionado = "HospitalEscuintla";
+            return View("MenuHospital", Storage.Instance.hospitalEscuintla);
+        }
+        public ActionResult HospitalOriente()
+        {
+             Storage.Instance.hospitalSeleccionado = "HospitalOriente";
+            return View("MenuHospital", Storage.Instance.hospitalOriente);
+        }
+
+
         #endregion
 
         public ActionResult CamasDisponibles()
         {
-            return View("ListaCamasDisponibles",this.hospitalSeleccionado.CamasDisponibles());
+            switch (Storage.Instance.hospitalSeleccionado)
+            {
+                case "HospitalCapital":
+                    return View("ListaCamasDisponibles", Storage.Instance.hospitalCapital.CamillasDisponibles);
+
+                case "HospitalQuetzaltenango":
+                    return View("ListaCamasDisponibles", Storage.Instance.hospitalQuetzaltenango.CamillasDisponibles);
+
+                case "HospitalPeten":
+                    return View("ListaCamasDisponibles", Storage.Instance.hospitalEscuintla.CamillasDisponibles);
+
+                case "HospitalEscuintla":
+                    return View("ListaCamasDisponibles", Storage.Instance.hospitalEscuintla.CamillasDisponibles);
+
+                case "HospitalOriente":
+                    return View("ListaCamasDisponibles", Storage.Instance.hospitalOriente.CamillasDisponibles);
+
+                default:
+                    return View();
+
+            }
         }
 
     }
