@@ -1,5 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\Proyecto1ED1\packages\Roslyn.Diagnostics.Analyzers.3.0.0\build\Roslyn.Diagnostics.Analyzers.props" Condition="Exists('..\Proyecto1ED1\packages\Roslyn.Diagnostics.Analyzers.3.0.0\build\Roslyn.Diagnostics.Analyzers.props')" />
+  <Import Project="..\Proyecto1ED1\packages\Microsoft.CodeAnalysis.PublicApiAnalyzers.3.0.0\build\Microsoft.CodeAnalysis.PublicApiAnalyzers.props" Condition="Exists('..\Proyecto1ED1\packages\Microsoft.CodeAnalysis.PublicApiAnalyzers.3.0.0\build\Microsoft.CodeAnalysis.PublicApiAnalyzers.props')" />
+  <Import Project="..\Proyecto1ED1\packages\Microsoft.CodeAnalysis.BannedApiAnalyzers.3.0.0\build\Microsoft.CodeAnalysis.BannedApiAnalyzers.props" Condition="Exists('..\Proyecto1ED1\packages\Microsoft.CodeAnalysis.BannedApiAnalyzers.3.0.0\build\Microsoft.CodeAnalysis.BannedApiAnalyzers.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -12,6 +15,8 @@
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -41,12 +46,34 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Interfaces\InterfazAVL.cs" />
     <Compile Include="Interfaces\INotLinearDataBase.cs" />
+    <Compile Include="Structures\AVLTree.cs" />
     <Compile Include="Structures\HashTable.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Structures\Node.cs" />
+    <Compile Include="Structures\NodeAVL.cs" />
     <Compile Include="Structures\PriorityQueue.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Analyzer Include="..\Proyecto1ED1\packages\Microsoft.CodeAnalysis.BannedApiAnalyzers.3.0.0\analyzers\dotnet\cs\Microsoft.CodeAnalysis.BannedApiAnalyzers.dll" />
+    <Analyzer Include="..\Proyecto1ED1\packages\Microsoft.CodeAnalysis.BannedApiAnalyzers.3.0.0\analyzers\dotnet\cs\Microsoft.CodeAnalysis.CSharp.BannedApiAnalyzers.dll" />
+    <Analyzer Include="..\Proyecto1ED1\packages\Microsoft.CodeAnalysis.PublicApiAnalyzers.3.0.0\analyzers\dotnet\cs\Microsoft.CodeAnalysis.PublicApiAnalyzers.resources.dll" />
+    <Analyzer Include="..\Proyecto1ED1\packages\Microsoft.CodeAnalysis.PublicApiAnalyzers.3.0.0\analyzers\dotnet\Microsoft.CodeAnalysis.PublicApiAnalyzers.CodeFixes.dll" />
+    <Analyzer Include="..\Proyecto1ED1\packages\Microsoft.CodeAnalysis.PublicApiAnalyzers.3.0.0\analyzers\dotnet\Microsoft.CodeAnalysis.PublicApiAnalyzers.dll" />
+    <Analyzer Include="..\Proyecto1ED1\packages\Roslyn.Diagnostics.Analyzers.3.0.0\analyzers\dotnet\cs\Roslyn.Diagnostics.Analyzers.dll" />
+    <Analyzer Include="..\Proyecto1ED1\packages\Roslyn.Diagnostics.Analyzers.3.0.0\analyzers\dotnet\cs\Roslyn.Diagnostics.CSharp.Analyzers.dll" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\Proyecto1ED1\packages\Microsoft.CodeAnalysis.BannedApiAnalyzers.3.0.0\build\Microsoft.CodeAnalysis.BannedApiAnalyzers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\Proyecto1ED1\packages\Microsoft.CodeAnalysis.BannedApiAnalyzers.3.0.0\build\Microsoft.CodeAnalysis.BannedApiAnalyzers.props'))" />
+    <Error Condition="!Exists('..\Proyecto1ED1\packages\Microsoft.CodeAnalysis.PublicApiAnalyzers.3.0.0\build\Microsoft.CodeAnalysis.PublicApiAnalyzers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\Proyecto1ED1\packages\Microsoft.CodeAnalysis.PublicApiAnalyzers.3.0.0\build\Microsoft.CodeAnalysis.PublicApiAnalyzers.props'))" />
+    <Error Condition="!Exists('..\Proyecto1ED1\packages\Roslyn.Diagnostics.Analyzers.3.0.0\build\Roslyn.Diagnostics.Analyzers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\Proyecto1ED1\packages\Roslyn.Diagnostics.Analyzers.3.0.0\build\Roslyn.Diagnostics.Analyzers.props'))" />
+  </Target>
 </Project>
