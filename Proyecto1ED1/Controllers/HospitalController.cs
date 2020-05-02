@@ -372,5 +372,39 @@ namespace Proyecto1ED1.Controllers
             }
         }
         #endregion
+
+
+        public void RealizarUnaPrueba()
+        {
+            switch (Storage.Instance.hospitalSeleccionado)
+            {
+                case "HospitalCapital":
+                    //Usar la cola para buscar en el arbol y traer al paciente para la prueba
+                    //Storage.Instance.hospitalCapital.PruebaContagio(Storage.Instance.hospitalCapital.colaSospechosos.Peek().);
+                    break;
+
+                case "HospitalQuetzaltenango":
+
+                    break;
+
+                case "HospitalPeten":
+
+                    break;
+
+                case "HospitalEscuintla":
+
+                    break;
+
+                case "HospitalOriente":
+
+                    break;
+               
+                    
+
+            }
+        }
+
+        
+
     }
 }
