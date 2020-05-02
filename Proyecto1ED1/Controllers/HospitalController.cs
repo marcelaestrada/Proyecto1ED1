@@ -45,6 +45,14 @@ namespace Proyecto1ED1.Controllers
         {
             return View();
         }
+        public ActionResult MenuBusquedas()
+        {
+            return View();
+        }
+        public ActionResult Busquedas()
+        {
+            return View();
+        }
         #endregion 
 
         [HttpPost]
@@ -65,6 +73,7 @@ namespace Proyecto1ED1.Controllers
             newPatient.Contagio = collection["Contagio"];
             newPatient.Categoria = collection["Categoria"];
             newPatient.Caracteristica = collection["Caracteristica"];
+            newPatient.Estado = newPatient.Categoria;
             #endregion
 
             #region Informacion de registro para cola 
@@ -141,7 +150,6 @@ namespace Proyecto1ED1.Controllers
                         return (dato.Disponible) ? true : false;
                     });
 
-
                     //Llamar al hashTable del hospital Correspondiente....
                     //Hacer un search de la camilla con ese código y al objeto de retorno ingresarle el paciente.
                     hospitalCorrespondiente.camillas.Search(camaDisponible.Codigo).PacienteActual = newPatient;
@@ -189,6 +197,7 @@ namespace Proyecto1ED1.Controllers
             }
             #endregion
 
+            Storage.Instance.dataPacientes.Insert(newPatient.Nombre, newPatient.Apellido, newPatient.DPI_Partida, newPatient);
             return View("Index");
         }
         
@@ -373,6 +382,7 @@ namespace Proyecto1ED1.Controllers
         }
         #endregion
 
+<<<<<<< HEAD
 
         public void RealizarUnaPrueba()
         {
@@ -406,5 +416,45 @@ namespace Proyecto1ED1.Controllers
 
         
 
+=======
+        #region Busquedas
+        [HttpPost]
+        public ActionResult MenuBusquedas(FormCollection collection)
+        {
+            List<PatientInfo> pacientesEncontrados = new List<PatientInfo>();
+            pacientesEncontrados = null;
+            PatientInfo estaVacio = new PatientInfo();
+            
+            estaVacio.Nombre = "";
+            estaVacio.Apellido = "";
+            estaVacio.DPI_Partida = 000;
+            estaVacio.Departamento = "";
+            estaVacio.Municipio = "";
+            estaVacio.Sintomas = "";
+            estaVacio.Contagio = "";
+            estaVacio.Categoria = "";
+            estaVacio.Caracteristica = "";
+            estaVacio.Estado = "";
+
+            if (collection["Parametro"] == "nombre")
+            {
+                pacientesEncontrados = Storage.Instance.dataPacientes.Busqueda("nombre", collection["Valor"]);
+            } else if (collection["Parametro"] == "apellido")
+            {
+                pacientesEncontrados = Storage.Instance.dataPacientes.Busqueda("apellido", collection["Valor"]);
+            } else if (collection["Parametro"] == "dpi")
+            {
+                pacientesEncontrados = Storage.Instance.dataPacientes.Busqueda("dpi", collection["Valor"]);
+            }
+
+            if (pacientesEncontrados == null)
+            {
+                pacientesEncontrados.Add(estaVacio);
+            }
+
+            return View("Busquedas", pacientesEncontrados);
+        }
+        #endregion
+>>>>>>> origin/Busquedas
     }
 }

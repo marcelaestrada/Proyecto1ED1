@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using Proyecto1ED1.Models.Model;
+using Proyecto1ED1.Models;
+using CustomGenerics.Structures;
 
 namespace Proyecto1ED1.Helpers
 {
@@ -39,5 +41,8 @@ namespace Proyecto1ED1.Helpers
 
         //Hospital seleccionado a administrar. 
         public string hospitalSeleccionado = " ";
+
+        //Almacenamiento de informacion de enfermos 
+        public AVLTree<PatientInfo> dataPacientes = new AVLTree<PatientInfo>();
     }
 }

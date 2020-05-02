@@ -17,6 +17,7 @@ namespace Proyecto1ED1.Models
         public string Contagio { get; set; }
         public string Categoria { get; set; }
         public string Caracteristica { get; set; }
+        public string Estado { get; set; }
 
         public int CompareTo(object obj)
         {

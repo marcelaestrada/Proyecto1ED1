@@ -125,12 +125,14 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\Storage.cs" />
+    <Compile Include="Models\Enums\Busqueda.cs" />
     <Compile Include="Models\Enums\Categoria.cs" />
     <Compile Include="Models\Enums\Departamentos.cs" />
     <Compile Include="Models\Enums\Hospitales.cs" />
     <Compile Include="Models\Model\Cama.cs" />
     <Compile Include="Models\Model\Estadisticas.cs" />
     <Compile Include="Models\Model\Hospital.cs" />
+    <Compile Include="Models\Model\ParaBusquedas.cs" />
     <Compile Include="Models\Model\PatientInfo.cs" />
     <Compile Include="Models\Enums\PosibleContagio.cs" />
     <Compile Include="Models\Model\PrioridadCola.cs" />
@@ -291,6 +293,8 @@
     <Content Include="Views\Hospital\ListaCamasDisponibles.cshtml" />
     <Content Include="Views\Hospital\EstadisticaGeneralHospital.cshtml" />
     <Content Include="Views\Hospital\EstadisticaPorHospital.cshtml" />
+    <Content Include="Views\Hospital\Busquedas.cshtml" />
+    <Content Include="Views\Hospital\MenuBusquedas.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
