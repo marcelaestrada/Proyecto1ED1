@@ -382,31 +382,59 @@ namespace Proyecto1ED1.Controllers
         }
         #endregion
 
-<<<<<<< HEAD
+        public void PruebaPorHospital(Hospital hospital)
+        {
+            PrioridadCola pacienteSeleccionado = hospital.colaSospechosos.Peek();
+            long dpi = pacienteSeleccionado.dpi;
+            PatientInfo patient = Storage.Instance.dataPacientes.Busqueda("dpi", dpi.ToString())[0];
+            bool prueba = hospital.PruebaContagio(patient);
+
+            if (prueba)
+            {
+                hospital.colaContagiados.Insert(pacienteSeleccionado.prioridad, pacienteSeleccionado);
+                hospital.colaSospechosos.Delete();
+                Response.Write("<script>alert('El paciente que era sospechoso y seguía en la cola ha resultado positivo para el Covid - 19')</script>");
+               // Cambiar estado?
+            }
+            else
+            {
+                Response.Write("<script>alert('La prueba ha salido negativa')</script>");
+                // Cambiar estado a recuperado. 
+            }
+        }
 
         public void RealizarUnaPrueba()
         {
             switch (Storage.Instance.hospitalSeleccionado)
             {
                 case "HospitalCapital":
-                    //Usar la cola para buscar en el arbol y traer al paciente para la prueba
-                    //Storage.Instance.hospitalCapital.PruebaContagio(Storage.Instance.hospitalCapital.colaSospechosos.Peek().);
+                    PruebaPorHospital(Storage.Instance.hospitalCapital);
+                    Hospital hospital = Storage.Instance.hospitalCapital;
+                    int flag = 0;
                     break;
 
                 case "HospitalQuetzaltenango":
-
+                    PruebaPorHospital(Storage.Instance.hospitalQuetzaltenango);
+                    Hospital hospital2 = Storage.Instance.hospitalQuetzaltenango;
+                    int flag2 = 0;
                     break;
 
                 case "HospitalPeten":
-
+                    PruebaPorHospital(Storage.Instance.hospitalPeten);
+                    Hospital hospital3 = Storage.Instance.hospitalPeten;
+                    int flag3 = 0;
                     break;
 
                 case "HospitalEscuintla":
-
+                    PruebaPorHospital(Storage.Instance.hospitalEscuintla);
+                    Hospital hospital4 = Storage.Instance.hospitalEscuintla;
+                    int flag4 = 0;
                     break;
 
                 case "HospitalOriente":
-
+                    PruebaPorHospital(Storage.Instance.hospitalOriente);
+                    Hospital hospital5 = Storage.Instance.hospitalOriente;
+                    int flag5 = 0;
                     break;
                
                     
@@ -416,7 +444,7 @@ namespace Proyecto1ED1.Controllers
 
         
 
-=======
+
         #region Busquedas
         [HttpPost]
         public ActionResult MenuBusquedas(FormCollection collection)
@@ -455,6 +483,6 @@ namespace Proyecto1ED1.Controllers
             return View("Busquedas", pacientesEncontrados);
         }
         #endregion
->>>>>>> origin/Busquedas
+
     }
 }
