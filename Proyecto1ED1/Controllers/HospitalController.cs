@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using Proyecto1ED1.Models;
 using Proyecto1ED1.Models.Model;
 using Proyecto1ED1.Helpers;
+using CustomGenerics.Structures;
 
 namespace Proyecto1ED1.Controllers
 {
@@ -168,7 +169,7 @@ namespace Proyecto1ED1.Controllers
                     hospitalCorrespondiente.camillas.Search(camaDisponible.Codigo).Disponible = false;
 
                     hospitalCorrespondiente.CamillasDisponibles = hospitalCorrespondiente.CamasDisponibles();
-                   
+
 
 
                 }
@@ -375,11 +376,47 @@ namespace Proyecto1ED1.Controllers
             }
         }
 
+
+
+        public Hospital HospitalCambioEstado()
+        {
+            //En los case se puede agregar las estadisticas.
+            switch (Storage.Instance.hospitalSeleccionado)
+            {
+                case "HospitalCapital":
+                    return Storage.Instance.hospitalCapital;
+                case "HospitalQuetzaltenango":
+                    return Storage.Instance.hospitalQuetzaltenango;
+                case "HospitalPeten":
+                    return Storage.Instance.hospitalPeten;
+                case "HospitalEscuintla":
+                    return Storage.Instance.hospitalEscuintla;
+                case "HospitalOriente":
+                    return Storage.Instance.hospitalOriente;
+                default:
+                    Hospital hospital = new Hospital("Default");
+                    return hospital;
+            }
+        }
+
         public ActionResult CambiarEstado(int id)
         {
             int flag = id;
+            long dpi = 0;
+            //Cambiar el id por el codigo para usar funcion de hashmap
+            Cama camaPaciente = HospitalCambioEstado().camillas.AllDataLikeList().Find((cama) =>
+            {
+                return (cama.id == id) ? true : false;
+            });
+            dpi = camaPaciente.PacienteActual.dpi;
 
-            return View();
+            NodeAVL<PatientInfo> nodoPaciente = Storage.Instance.dataPacientes.SearchOneValue(dpi);
+            nodoPaciente.value.Estado = "Recuperado";
+
+            //Instancia para depurar
+            NodeAVL<PatientInfo> nodoPacienteFlag = Storage.Instance.dataPacientes.SearchOneValue(dpi);
+
+            return View("MenuHospital");
         }
         #endregion
 
@@ -462,8 +499,11 @@ namespace Proyecto1ED1.Controllers
                     }
                     Response.Write("<script>alert('El paciente que era sospechoso y seguía en la cola ha resultado positivo para el Covid - 19')</script>");
                     //TODO: Revisar si es necesario este cambio de estado....
-                    Storage.Instance.dataPacientes.SearchOneValue(dpi).Estado = "No Recuperado";
-                    
+                    NodeAVL<PatientInfo> nodoPaciente = Storage.Instance.dataPacientes.SearchOneValue(dpi);
+                    nodoPaciente.value.Estado = "No Recuperado";
+
+                    NodeAVL<PatientInfo> nodoPacienteFlag = Storage.Instance.dataPacientes.SearchOneValue(dpi);
+
                 }
                 else
                 {
@@ -473,7 +513,10 @@ namespace Proyecto1ED1.Controllers
                     Response.Write("<script>alert('La prueba ha salido negativa')</script>");
                     hospital.colaSospechosos.Delete();
                     //TODO: Revisar el string de este estado...
-                    Storage.Instance.dataPacientes.SearchOneValue(dpi).Estado = "Sospechoso Negativo";
+                    NodeAVL<PatientInfo> nodoPaciente = Storage.Instance.dataPacientes.SearchOneValue(dpi);
+                    nodoPaciente.value.Estado = "Sospechoso Negativo";
+
+                    NodeAVL<PatientInfo> nodoPacienteFlag = Storage.Instance.dataPacientes.SearchOneValue(dpi);
 
                 }
 
@@ -562,6 +605,7 @@ namespace Proyecto1ED1.Controllers
             return View("Busquedas", pacientesEncontrados);
         }
         #endregion
+
 
     }
 }

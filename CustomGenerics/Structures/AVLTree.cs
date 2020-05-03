@@ -146,9 +146,9 @@ namespace CustomGenerics.Structures
         /// </summary>
         /// <param name="value"></param>
         /// <returns></returns>
-        public T SearchOneValue(long value)
+        public NodeAVL<T> SearchOneValue(long value)
         {
-            return Search(value, root).value;
+            return Search(value, root);
         }
        
         
