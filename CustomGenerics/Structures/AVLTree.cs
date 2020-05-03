@@ -140,6 +140,16 @@ namespace CustomGenerics.Structures
         {
             return Search(value, root) != null ? true : false;
         }
+
+        /// <summary>
+        /// Regresa el elemento especifico buscado.
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public T SearchOneValue(long value)
+        {
+            return Search(value, root).value;
+        }
        
         
         //metodos de rotacion

@@ -109,12 +109,7 @@ namespace CustomGenerics.Structures
 
         public T Peek()
         {
-            /*if (size > -1)
-                return priorityQueue[0].value;
-            else
-                return priorityQueue[0].value;*/
-
-
+            
             return priorityQueue[0].value;
 
         }

@@ -384,62 +384,73 @@ namespace Proyecto1ED1.Controllers
 
         public void PruebaPorHospital(Hospital hospital)
         {
-            PrioridadCola pacienteSeleccionado = hospital.colaSospechosos.Peek();
-            long dpi = pacienteSeleccionado.dpi;
-            PatientInfo patient = Storage.Instance.dataPacientes.Busqueda("dpi", dpi.ToString())[0];
-            bool prueba = hospital.PruebaContagio(patient);
+            try
+            {
+                PrioridadCola pacienteSeleccionado = hospital.colaSospechosos.Peek();
+                long dpi = pacienteSeleccionado.dpi;
+                PatientInfo patient = Storage.Instance.dataPacientes.Busqueda("dpi", dpi.ToString())[0];
+                bool prueba = hospital.PruebaContagio(patient);
 
-            if (prueba)
-            {
-                hospital.colaContagiados.Insert(pacienteSeleccionado.prioridad, pacienteSeleccionado);
-                hospital.colaSospechosos.Delete();
-                Response.Write("<script>alert('El paciente que era sospechoso y seguía en la cola ha resultado positivo para el Covid - 19')</script>");
-               // Cambiar estado?
+                if (prueba)
+                {
+                    hospital.colaContagiados.Insert(pacienteSeleccionado.prioridad, pacienteSeleccionado);
+                    hospital.colaSospechosos.Delete();
+                    Response.Write("<script>alert('El paciente que era sospechoso y seguía en la cola ha resultado positivo para el Covid - 19')</script>");
+                    //TODO: Revisar si es necesario este cambio de estado....
+                    Storage.Instance.dataPacientes.SearchOneValue(dpi).Estado = "No Recuperado";
+                    // Cambiar estado?
+                }
+                else
+                {
+                    Response.Write("<script>alert('La prueba ha salido negativa')</script>");
+                    hospital.colaSospechosos.Delete();
+                    //TODO: Revisar el string de este estado...
+                    Storage.Instance.dataPacientes.SearchOneValue(dpi).Estado = "Sospechoso Negativo";
+
+                }
             }
-            else
+            catch (Exception)
             {
-                Response.Write("<script>alert('La prueba ha salido negativa')</script>");
-                // Cambiar estado a recuperado. 
+                Response.Write("<script>alert('No se puedo realizar la prueba, no hay sospechosos en la cola.')</script>");
             }
+           
+           
         }
 
-        public void RealizarUnaPrueba()
+        public ActionResult RealizarUnaPrueba()
         {
             switch (Storage.Instance.hospitalSeleccionado)
             {
                 case "HospitalCapital":
                     PruebaPorHospital(Storage.Instance.hospitalCapital);
-                    Hospital hospital = Storage.Instance.hospitalCapital;
-                    int flag = 0;
+
                     break;
 
                 case "HospitalQuetzaltenango":
                     PruebaPorHospital(Storage.Instance.hospitalQuetzaltenango);
-                    Hospital hospital2 = Storage.Instance.hospitalQuetzaltenango;
-                    int flag2 = 0;
+                    
                     break;
 
                 case "HospitalPeten":
                     PruebaPorHospital(Storage.Instance.hospitalPeten);
-                    Hospital hospital3 = Storage.Instance.hospitalPeten;
-                    int flag3 = 0;
+                   
                     break;
 
                 case "HospitalEscuintla":
                     PruebaPorHospital(Storage.Instance.hospitalEscuintla);
-                    Hospital hospital4 = Storage.Instance.hospitalEscuintla;
-                    int flag4 = 0;
+                   
                     break;
 
                 case "HospitalOriente":
                     PruebaPorHospital(Storage.Instance.hospitalOriente);
-                    Hospital hospital5 = Storage.Instance.hospitalOriente;
-                    int flag5 = 0;
+                    
                     break;
                
                     
 
             }
+           
+            return View("MenuHospital");
         }
 
         
