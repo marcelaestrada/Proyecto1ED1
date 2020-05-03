@@ -164,14 +164,12 @@ namespace Proyecto1ED1.Controllers
 
                     //Llamar al hashTable del hospital Correspondiente....
                     //Hacer un search de la camilla con ese código y al objeto de retorno ingresarle el paciente.
-                    hospitalCorrespondiente.camillas.Search(camaDisponible.Codigo).PacienteActual = newPatient;
+                    hospitalCorrespondiente.camillas.Search(camaDisponible.Codigo).PacienteActual = infoCola;
                     hospitalCorrespondiente.camillas.Search(camaDisponible.Codigo).Disponible = false;
 
                     hospitalCorrespondiente.CamillasDisponibles = hospitalCorrespondiente.CamasDisponibles();
-                    var s = Storage.Instance.hospitalCapital;
+                   
 
-                    int flag = 0;
-                    // Hospital hospitalBandera = Storage.Instance.hospitalCapital;
 
                 }
                 else
@@ -351,7 +349,40 @@ namespace Proyecto1ED1.Controllers
 
             }
         }
+
+        public ActionResult CamasOcupadas()
+        {
+            switch (Storage.Instance.hospitalSeleccionado)
+            {
+                case "HospitalCapital":
+                    return View("CamasOcupadas", Storage.Instance.hospitalCapital.CamasOcupadas());
+
+                case "HospitalQuetzaltenango":
+                    return View("CamasOcupadas", Storage.Instance.hospitalQuetzaltenango.CamasOcupadas());
+
+                case "HospitalPeten":
+                    return View("CamasOcupadas", Storage.Instance.hospitalEscuintla.CamasOcupadas());
+
+                case "HospitalEscuintla":
+                    return View("CamasOcupadas", Storage.Instance.hospitalEscuintla.CamasOcupadas());
+
+                case "HospitalOriente":
+                    return View("CamasOcupadas", Storage.Instance.hospitalOriente.CamasOcupadas());
+
+                default:
+                    return View();
+
+            }
+        }
+
+        public ActionResult CambiarEstado(int id)
+        {
+            int flag = id;
+
+            return View();
+        }
         #endregion
+
 
         #region Estadisticas
         [HttpPost]
@@ -402,12 +433,37 @@ namespace Proyecto1ED1.Controllers
                     data.sospechososPositivo++;
                     data.contagiadosIngresados++;
 
-                    hospital.colaContagiados.Insert(pacienteSeleccionado.prioridad, pacienteSeleccionado);
-                    hospital.colaSospechosos.Delete();
+
+                    if (hospital.contagiadosCamilla < 10)
+                    {
+                        hospital.contagiadosCamilla++;
+
+                        //Encontrar primer camilla libre y sacar su código. 
+                        Cama camaDisponible = hospital.camillas.AllDataLikeList().Find((dato) =>
+                        {
+                            return (dato.Disponible) ? true : false;
+                        });
+
+                        //Llamar al hashTable del hospital Correspondiente....
+                        //Hacer un search de la camilla con ese código y al objeto de retorno ingresarle el paciente.
+                        hospital.camillas.Search(camaDisponible.Codigo).PacienteActual = pacienteSeleccionado;
+                        hospital.camillas.Search(camaDisponible.Codigo).Disponible = false;
+
+                        hospital.CamillasDisponibles = hospital.CamasDisponibles();
+
+
+
+                    }
+                    else
+                    {
+                        hospital.colaContagiados.Insert(pacienteSeleccionado.prioridad, pacienteSeleccionado);
+
+                        hospital.colaSospechosos.Delete();
+                    }
                     Response.Write("<script>alert('El paciente que era sospechoso y seguía en la cola ha resultado positivo para el Covid - 19')</script>");
                     //TODO: Revisar si es necesario este cambio de estado....
                     Storage.Instance.dataPacientes.SearchOneValue(dpi).Estado = "No Recuperado";
-                    // Cambiar estado?
+                    
                 }
                 else
                 {

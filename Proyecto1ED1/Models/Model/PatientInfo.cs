@@ -21,7 +21,7 @@ namespace Proyecto1ED1.Models
 
         public int CompareTo(object obj)
         {
-            return DPI_Partida.CompareTo(obj);
+            return this.DPI_Partida.CompareTo(obj.ToString());
         }
     }
 }

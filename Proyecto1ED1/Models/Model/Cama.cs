@@ -7,14 +7,15 @@ namespace Proyecto1ED1.Models.Model
 {
     public class Cama : IComparable
     {
+       
         public string Codigo { get; set; }
-        public int NumeroDeCama { get; set; }
+        public int id { get; set; }
         public bool Disponible { get; set; }
-        public PatientInfo PacienteActual { get; set; }
+        public PrioridadCola PacienteActual { get; set; }
 
         public Cama(string nombreHospital, int numeroCama)
         {
-            NumeroDeCama = numeroCama;
+            id = numeroCama;
             Disponible = true;
             Codigo = CreateHash(nombreHospital,numeroCama).ToString();
             PacienteActual = null;

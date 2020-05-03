@@ -19,6 +19,7 @@ namespace Proyecto1ED1.Models.Model
 
         //Guardar las camas que están disponibles. 
         public List<Cama> CamillasDisponibles = new List<Cama>();
+        public List<Cama> CamillasOcupadas = new List<Cama>();
 
 
         public Hospital(string NombreHospital)
@@ -33,7 +34,7 @@ namespace Proyecto1ED1.Models.Model
                 Cama nuevaCama = new Cama(this.Nombre, i + 1);
                 camillas.Insert(nuevaCama.Codigo, nuevaCama);
                 //Setear como false la disponibilidad de las camillas. 
-                CamillasDisponibles = CamillasDisponibles = this.camillas.AllDataLikeList().FindAll((cama) =>
+                CamillasDisponibles = this.camillas.AllDataLikeList().FindAll((cama) =>
                 {
                     return (cama.Disponible) ? true : false;
                 });
@@ -102,6 +103,14 @@ namespace Proyecto1ED1.Models.Model
             });
         }
 
+        public List<Cama> CamasOcupadas()
+        {
+            return this.camillas.AllDataLikeList().FindAll((cama)=> {
+
+                return (!cama.Disponible) ? true : false;
+            });
+        }
+
         /// <summary>
         /// Devuelve un listado de pacientes en cama, para en la ui cambiar el 
         /// estado de los pacientes a recuperado asignar al siguiente en la cola
@@ -114,22 +123,7 @@ namespace Proyecto1ED1.Models.Model
                 return (cama.Disponible) ? true : false;
             });
         }
-        public void AsignacionDeCama(PatientInfo paciente)
-        {
-            //Encontrar la primer cama disponible y agregar un paciente al hash de camas 
-            // en la pos de esa cama
-            CamasDisponibles().Find((cama)=> {
-                if (cama.Disponible)
-                {
-                    camillas.Search(cama.Codigo).PacienteActual = paciente;
-                    camillas.Search(cama.Codigo).Disponible = false;
-                    return true;
-                }
-                else return false;
-            });
-
-            
-        }
+       
 
 
 
