@@ -11,7 +11,7 @@ namespace Proyecto1ED1.Controllers
 {
     public class HospitalController : Controller
     {
-       
+
         #region Metodos GET
         // GET: Hospital
         public ActionResult Index()
@@ -308,7 +308,7 @@ namespace Proyecto1ED1.Controllers
         }
         public ActionResult HospitalQuetzaltenango()
         {
-             Storage.Instance.hospitalSeleccionado = "HospitalQuetzaltenango";
+            Storage.Instance.hospitalSeleccionado = "HospitalQuetzaltenango";
             return View("MenuHospital", Storage.Instance.hospitalQuetzaltenango);
         }
         public ActionResult HospitalPeten()
@@ -318,12 +318,12 @@ namespace Proyecto1ED1.Controllers
         }
         public ActionResult HospitalEscuintla()
         {
-             Storage.Instance.hospitalSeleccionado = "HospitalEscuintla";
+            Storage.Instance.hospitalSeleccionado = "HospitalEscuintla";
             return View("MenuHospital", Storage.Instance.hospitalEscuintla);
         }
         public ActionResult HospitalOriente()
         {
-             Storage.Instance.hospitalSeleccionado = "HospitalOriente";
+            Storage.Instance.hospitalSeleccionado = "HospitalOriente";
             return View("MenuHospital", Storage.Instance.hospitalOriente);
         }
 
@@ -360,16 +360,20 @@ namespace Proyecto1ED1.Controllers
             if (collection["nombre"] == "Capital")
             {
                 return View("EstadisticaPorHospital", (Storage.Instance.datosCapital));
-            }else if (collection["nombre"] == "Quetzaltenango")
+            }
+            else if (collection["nombre"] == "Quetzaltenango")
             {
                 return View("EstadisticaPorHospital", (Storage.Instance.datosQuetzaltenango));
-            }else if (collection["nombre"] == "Peten")
+            }
+            else if (collection["nombre"] == "Peten")
             {
                 return View("EstadisticaPorHospital", (Storage.Instance.datosPeten));
-            }else if (collection["nombre"] == "Escuintla")
+            }
+            else if (collection["nombre"] == "Escuintla")
             {
                 return View("EstadisticaPorHospital", (Storage.Instance.datosEscuintla));
-            }else if (collection["nombre"] == "Oriente")
+            }
+            else if (collection["nombre"] == "Oriente")
             {
                 return View("EstadisticaPorHospital", (Storage.Instance.datosOriente));
             }
@@ -385,7 +389,7 @@ namespace Proyecto1ED1.Controllers
         {
             try
             {
-<<<<<<< HEAD
+
                 PrioridadCola pacienteSeleccionado = hospital.colaSospechosos.Peek();
                 long dpi = pacienteSeleccionado.dpi;
                 PatientInfo patient = Storage.Instance.dataPacientes.Busqueda("dpi", dpi.ToString())[0];
@@ -393,6 +397,11 @@ namespace Proyecto1ED1.Controllers
 
                 if (prueba)
                 {
+                    Storage.Instance.datos.sospechososPositivo++;
+                    Storage.Instance.datos.contagiadosIngresados++;
+                    data.sospechososPositivo++;
+                    data.contagiadosIngresados++;
+
                     hospital.colaContagiados.Insert(pacienteSeleccionado.prioridad, pacienteSeleccionado);
                     hospital.colaSospechosos.Delete();
                     Response.Write("<script>alert('El paciente que era sospechoso y seguía en la cola ha resultado positivo para el Covid - 19')</script>");
@@ -402,36 +411,24 @@ namespace Proyecto1ED1.Controllers
                 }
                 else
                 {
+                    Storage.Instance.datos.sospechososNegativo++;
+                    data.sospechososNegativo++;
+
                     Response.Write("<script>alert('La prueba ha salido negativa')</script>");
                     hospital.colaSospechosos.Delete();
                     //TODO: Revisar el string de este estado...
                     Storage.Instance.dataPacientes.SearchOneValue(dpi).Estado = "Sospechoso Negativo";
 
                 }
-=======
-                Storage.Instance.datos.sospechososPositivo++;
-                Storage.Instance.datos.contagiadosIngresados++;
-                data.sospechososPositivo++;
-                data.contagiadosIngresados++;
-                hospital.colaContagiados.Insert(pacienteSeleccionado.prioridad, pacienteSeleccionado);
-                hospital.colaSospechosos.Delete();
-                Response.Write("<script>alert('El paciente que era sospechoso y seguía en la cola ha resultado positivo para el Covid - 19')</script>");
-                // Cambiar estado?
->>>>>>> 10faedb6700bd0219cca741671117ebf1a551476
+
             }
             catch (Exception)
             {
-<<<<<<< HEAD
                 Response.Write("<script>alert('No se puedo realizar la prueba, no hay sospechosos en la cola.')</script>");
-=======
-                Storage.Instance.datos.sospechososNegativo++;
-                data.sospechososNegativo++;
-                Response.Write("<script>alert('La prueba ha salido negativa')</script>");
-                // Cambiar estado a recuperado. 
->>>>>>> 10faedb6700bd0219cca741671117ebf1a551476
+
             }
-           
-           
+
+
         }
 
         public ActionResult RealizarUnaPrueba()
@@ -439,61 +436,31 @@ namespace Proyecto1ED1.Controllers
             switch (Storage.Instance.hospitalSeleccionado)
             {
                 case "HospitalCapital":
-<<<<<<< HEAD
-                    PruebaPorHospital(Storage.Instance.hospitalCapital);
 
-                    break;
-
-                case "HospitalQuetzaltenango":
-                    PruebaPorHospital(Storage.Instance.hospitalQuetzaltenango);
-                    
-                    break;
-
-                case "HospitalPeten":
-                    PruebaPorHospital(Storage.Instance.hospitalPeten);
-                   
-                    break;
-
-                case "HospitalEscuintla":
-                    PruebaPorHospital(Storage.Instance.hospitalEscuintla);
-                   
-                    break;
-
-                case "HospitalOriente":
-                    PruebaPorHospital(Storage.Instance.hospitalOriente);
-                    
-=======
                     PruebaPorHospital(Storage.Instance.hospitalCapital, Storage.Instance.datosCapital);
-                    Hospital hospital = Storage.Instance.hospitalCapital;
-                    int flag = 0;
+
                     break;
 
                 case "HospitalQuetzaltenango":
                     PruebaPorHospital(Storage.Instance.hospitalQuetzaltenango, Storage.Instance.datosQuetzaltenango);
-                    Hospital hospital2 = Storage.Instance.hospitalQuetzaltenango;
-                    int flag2 = 0;
+
                     break;
 
                 case "HospitalPeten":
                     PruebaPorHospital(Storage.Instance.hospitalPeten, Storage.Instance.datosPeten);
-                    Hospital hospital3 = Storage.Instance.hospitalPeten;
-                    int flag3 = 0;
+
                     break;
 
                 case "HospitalEscuintla":
                     PruebaPorHospital(Storage.Instance.hospitalEscuintla, Storage.Instance.datosEscuintla);
-                    Hospital hospital4 = Storage.Instance.hospitalEscuintla;
-                    int flag4 = 0;
+
                     break;
 
                 case "HospitalOriente":
                     PruebaPorHospital(Storage.Instance.hospitalOriente, Storage.Instance.datosOriente);
-                    Hospital hospital5 = Storage.Instance.hospitalOriente;
-                    int flag5 = 0;
->>>>>>> 10faedb6700bd0219cca741671117ebf1a551476
                     break;
             }
-           
+
             return View("MenuHospital");
         }
 
@@ -506,7 +473,7 @@ namespace Proyecto1ED1.Controllers
             List<PatientInfo> pacientesEncontrados = new List<PatientInfo>();
             pacientesEncontrados = null;
             PatientInfo estaVacio = new PatientInfo();
-            
+
             estaVacio.Nombre = "";
             estaVacio.Apellido = "";
             estaVacio.DPI_Partida = 000;
@@ -521,10 +488,12 @@ namespace Proyecto1ED1.Controllers
             if (collection["Parametro"] == "nombre")
             {
                 pacientesEncontrados = Storage.Instance.dataPacientes.Busqueda("nombre", collection["Valor"]);
-            } else if (collection["Parametro"] == "apellido")
+            }
+            else if (collection["Parametro"] == "apellido")
             {
                 pacientesEncontrados = Storage.Instance.dataPacientes.Busqueda("apellido", collection["Valor"]);
-            } else if (collection["Parametro"] == "dpi")
+            }
+            else if (collection["Parametro"] == "dpi")
             {
                 pacientesEncontrados = Storage.Instance.dataPacientes.Busqueda("dpi", collection["Valor"]);
             }
