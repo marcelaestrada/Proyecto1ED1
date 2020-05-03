@@ -23,6 +23,7 @@ namespace Proyecto1ED1.Controllers
             Storage.Instance.hospitalEscuintla.Nombre = "Hospital Escuintla";
             Storage.Instance.hospitalOriente.Nombre = "Hospital Oriente";
 
+            Hospital flag = Storage.Instance.hospitalCapital;
             return View();
         }
         public ActionResult Registro()
@@ -387,14 +388,19 @@ namespace Proyecto1ED1.Controllers
             switch (Storage.Instance.hospitalSeleccionado)
             {
                 case "HospitalCapital":
+                    
                     return Storage.Instance.hospitalCapital;
                 case "HospitalQuetzaltenango":
+                    
                     return Storage.Instance.hospitalQuetzaltenango;
                 case "HospitalPeten":
+                    Storage.Instance.estadisticaGeneral.Peten.egresados++;
                     return Storage.Instance.hospitalPeten;
                 case "HospitalEscuintla":
+                    
                     return Storage.Instance.hospitalEscuintla;
                 case "HospitalOriente":
+                    
                     return Storage.Instance.hospitalOriente;
                 default:
                     Hospital hospital = new Hospital("Default");
@@ -414,7 +420,8 @@ namespace Proyecto1ED1.Controllers
             HospitalCambioEstado().camillas.Search(id.ToString()).Disponible = true;
             HospitalCambioEstado().camillas.Search(id.ToString()).PacienteActual = null;
 
-            HospitalCambioEstado().CamillasDisponibles = HospitalCambioEstado().CamasDisponibles();
+           HospitalCambioEstado().CamillasDisponibles = HospitalCambioEstado().CamasDisponibles();
+           HospitalCambioEstado().CamillasOcupadas = HospitalCambioEstado().CamasOcupadas();
 
             return View("MenuHospital");
 

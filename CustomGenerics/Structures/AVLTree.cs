@@ -123,11 +123,12 @@ namespace CustomGenerics.Structures
             }
             else if (Value2.CompareTo(tree.dpi) == -1)
             {
-                return Search(Value2, tree.Right);
+                //return Search(Value2, tree.Right);
+                return Search(Value2, tree.Left);
             }
             else
             {
-                return Search(Value2, tree.Left);
+               return Search(Value2, tree.Right);
             }
         }
 
