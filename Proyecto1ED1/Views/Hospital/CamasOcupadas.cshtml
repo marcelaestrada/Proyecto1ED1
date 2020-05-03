@@ -29,7 +29,7 @@
             @Html.DisplayFor(modelItem => item.Disponible)
         </td>
         <td>
-            @Html.ActionLink("Cambiar Estado", "CambiarEstado", new { id = item.id }, new { @class = "btn btn-outline-dark btn-lg" }) 
+            @Html.ActionLink("Cambiar Estado", "CambiarEstado", new { id = item.Codigo }, new { @class = "btn btn-outline-dark btn-lg" }) 
         </td>
     </tr>
 }

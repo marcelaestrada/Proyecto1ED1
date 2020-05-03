@@ -169,6 +169,7 @@ namespace Proyecto1ED1.Controllers
                     hospitalCorrespondiente.camillas.Search(camaDisponible.Codigo).Disponible = false;
 
                     hospitalCorrespondiente.CamillasDisponibles = hospitalCorrespondiente.CamasDisponibles();
+                    hospitalCorrespondiente.CamillasOcupadas = hospitalCorrespondiente.CamasOcupadas();
 
 
 
@@ -356,19 +357,21 @@ namespace Proyecto1ED1.Controllers
             switch (Storage.Instance.hospitalSeleccionado)
             {
                 case "HospitalCapital":
-                    return View("CamasOcupadas", Storage.Instance.hospitalCapital.CamasOcupadas());
+                    //Storage.Instance.hospitalCapital.CamillasOcupadas = Storage.Instance.hospitalCapital.CamasOcupadas();
+                    var flag = Storage.Instance.hospitalCapital.CamillasOcupadas;
+                    return View("CamasOcupadas", Storage.Instance.hospitalCapital.CamillasOcupadas );
 
                 case "HospitalQuetzaltenango":
-                    return View("CamasOcupadas", Storage.Instance.hospitalQuetzaltenango.CamasOcupadas());
+                    return View("CamasOcupadas", Storage.Instance.hospitalQuetzaltenango.CamillasOcupadas);
 
                 case "HospitalPeten":
-                    return View("CamasOcupadas", Storage.Instance.hospitalPeten.CamasOcupadas());
+                    return View("CamasOcupadas", Storage.Instance.hospitalPeten.CamillasOcupadas);
 
                 case "HospitalEscuintla":
-                    return View("CamasOcupadas", Storage.Instance.hospitalEscuintla.CamasOcupadas());
+                    return View("CamasOcupadas", Storage.Instance.hospitalEscuintla.CamillasOcupadas);
 
                 case "HospitalOriente":
-                    return View("CamasOcupadas", Storage.Instance.hospitalOriente.CamasOcupadas());
+                    return View("CamasOcupadas", Storage.Instance.hospitalOriente.CamillasOcupadas);
 
                 default:
                     return View();
@@ -399,24 +402,19 @@ namespace Proyecto1ED1.Controllers
             }
         }
 
-        public ActionResult CambiarEstado(int id)
+        public ActionResult CambiarEstado(long id)
         {
             Storage.Instance.datos.egresados++;
-            int flag = id;
-
-            long dpi = 0;
-            //Cambiar el id por el codigo para usar funcion de hashmap
-            Cama camaPaciente = HospitalCambioEstado().camillas.AllDataLikeList().Find((cama) =>
-            {
-                return (cama.id == id) ? true : false;
-            });
-            dpi = camaPaciente.PacienteActual.dpi;
-
+            
+           long dpi =  HospitalCambioEstado().camillas.Search(id.ToString()).PacienteActual.dpi;
+           
             NodeAVL<PatientInfo> nodoPaciente = Storage.Instance.dataPacientes.SearchOneValue(dpi);
             nodoPaciente.value.Estado = "Recuperado";
 
-            //Instancia para depurar
-            NodeAVL<PatientInfo> nodoPacienteFlag = Storage.Instance.dataPacientes.SearchOneValue(dpi);
+            HospitalCambioEstado().camillas.Search(id.ToString()).Disponible = true;
+            HospitalCambioEstado().camillas.Search(id.ToString()).PacienteActual = null;
+
+            HospitalCambioEstado().CamillasDisponibles = HospitalCambioEstado().CamasDisponibles();
 
             return View("MenuHospital");
 

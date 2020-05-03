@@ -22,6 +22,7 @@ namespace Proyecto1ED1.Models.Model
         public List<Cama> CamillasOcupadas = new List<Cama>();
 
 
+
         public Hospital(string NombreHospital)
         {//Crear las 10 camas e incertarlas con su codigo y numero a la hashtable. 
             this.Nombre = NombreHospital;
@@ -37,6 +38,10 @@ namespace Proyecto1ED1.Models.Model
                 CamillasDisponibles = this.camillas.AllDataLikeList().FindAll((cama) =>
                 {
                     return (cama.Disponible) ? true : false;
+                });
+
+                CamillasOcupadas = this.camillas.AllDataLikeList().FindAll((cama)=> {
+                    return (!cama.Disponible) ? true : false;
                 });
             }
         }

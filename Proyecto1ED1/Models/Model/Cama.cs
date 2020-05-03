@@ -29,7 +29,7 @@ namespace Proyecto1ED1.Models.Model
             for (int i = 0; i < nombreHospital.Length; i++)
                 sumaDeElementos += Convert.ToInt32(nombreHospital[i]) * numeroCama;
 
-            return retorno = "001" + sumaDeElementos.ToString();
+            return retorno = "100" + sumaDeElementos.ToString();
         }
 
         public int CompareTo(object obj)
