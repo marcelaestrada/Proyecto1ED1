@@ -20,9 +20,12 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Menu principal", "Index", "Hospital")</li>
                     <li>@Html.ActionLink("Registro", "Registro", "Hospital")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    <li>@Html.ActionLink("Busqueda", "MenuBusquedas", "Hospital")</li>
+                    <li>@Html.ActionLink("Simulaciones", "Simulaciones", "Hospital")</li>
+                    <li>@Html.ActionLink("Estadisticas", "Estadisticas", "Hospital")</li>
+                    <li>@Html.ActionLink("Hospitales", "Hospitales", "Hospital")</li>
                 </ul>
             </div>
         </div>

@@ -38,6 +38,7 @@ namespace Proyecto1ED1.Helpers
         public Estadisticas datosPeten = new Estadisticas();
         public Estadisticas datosEscuintla = new Estadisticas();
         public Estadisticas datosOriente = new Estadisticas();
+        public EstadisticaGeneral estadisticaGeneral = new EstadisticaGeneral();
 
         //Hospital seleccionado a administrar. 
         public string hospitalSeleccionado = " ";
