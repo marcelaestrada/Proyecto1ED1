@@ -361,7 +361,7 @@ namespace Proyecto1ED1.Controllers
                     return View("CamasOcupadas", Storage.Instance.hospitalQuetzaltenango.CamasOcupadas());
 
                 case "HospitalPeten":
-                    return View("CamasOcupadas", Storage.Instance.hospitalEscuintla.CamasOcupadas());
+                    return View("CamasOcupadas", Storage.Instance.hospitalPeten.CamasOcupadas());
 
                 case "HospitalEscuintla":
                     return View("CamasOcupadas", Storage.Instance.hospitalEscuintla.CamasOcupadas());
@@ -377,12 +377,11 @@ namespace Proyecto1ED1.Controllers
 
         public ActionResult CambiarEstado(int id)
         {
+            Storage.Instance.datos.egresados++;
             int flag = id;
-
             return View();
         }
         #endregion
-
 
         #region Estadisticas
         [HttpPost]
