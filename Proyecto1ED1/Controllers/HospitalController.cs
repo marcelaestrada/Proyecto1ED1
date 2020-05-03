@@ -362,7 +362,7 @@ namespace Proyecto1ED1.Controllers
                     return View("CamasOcupadas", Storage.Instance.hospitalQuetzaltenango.CamasOcupadas());
 
                 case "HospitalPeten":
-                    return View("CamasOcupadas", Storage.Instance.hospitalEscuintla.CamasOcupadas());
+                    return View("CamasOcupadas", Storage.Instance.hospitalPeten.CamasOcupadas());
 
                 case "HospitalEscuintla":
                     return View("CamasOcupadas", Storage.Instance.hospitalEscuintla.CamasOcupadas());
@@ -401,7 +401,9 @@ namespace Proyecto1ED1.Controllers
 
         public ActionResult CambiarEstado(int id)
         {
+            Storage.Instance.datos.egresados++;
             int flag = id;
+<<<<<<< HEAD
             long dpi = 0;
             //Cambiar el id por el codigo para usar funcion de hashmap
             Cama camaPaciente = HospitalCambioEstado().camillas.AllDataLikeList().Find((cama) =>
@@ -417,9 +419,11 @@ namespace Proyecto1ED1.Controllers
             NodeAVL<PatientInfo> nodoPacienteFlag = Storage.Instance.dataPacientes.SearchOneValue(dpi);
 
             return View("MenuHospital");
+=======
+            return View();
+>>>>>>> bbe796a47a13acd5a98714ac0f7b01a3c866ae37
         }
         #endregion
-
 
         #region Estadisticas
         [HttpPost]
