@@ -28,6 +28,7 @@
                     ["Contagiados", @Html.ValueFor(model => Model.contagiadosIngresados)],
                     ["Sospechosos", @Html.ValueFor(model => Model.sospechososIngresados)],
                     ["Sospechosos contagiados", @Html.ValueFor(model => Model.sospechososPositivo)],
+                    ["Sospechosos no contagiados", @Html.ValueFor(model => Model.sospechososNegativo)],
                     ["Recuperados", @Html.ValueFor(model => Model.egresados)],
                 ]);
 
@@ -37,7 +38,7 @@
                     legend: { position: 'none' },
                     chart: {
                         title: 'Pacientes en hospital',
-                        subtitle: 'Por hospital'
+                        subtitle: "",
                     },
                     bars: 'horizontal',
                     axes: {

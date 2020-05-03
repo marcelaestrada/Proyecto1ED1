@@ -1,8 +1,5 @@
 ﻿@model IEnumerable<Proyecto1ED1.Models.Model.Cama>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
 <table class="table">
     <tr>
         <th>
@@ -27,11 +24,6 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Disponible)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
         </td>
     </tr>
 }

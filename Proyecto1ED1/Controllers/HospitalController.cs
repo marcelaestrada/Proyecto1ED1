@@ -39,7 +39,12 @@ namespace Proyecto1ED1.Controllers
         }
         public ActionResult EstadisticaGeneralHospital()
         {
-            return View();
+            Storage.Instance.estadisticaGeneral.Capital = Storage.Instance.datosCapital;
+            Storage.Instance.estadisticaGeneral.Escuintla = Storage.Instance.datosEscuintla;
+            Storage.Instance.estadisticaGeneral.Oriente = Storage.Instance.datosOriente;
+            Storage.Instance.estadisticaGeneral.Quetzaltenango = Storage.Instance.datosQuetzaltenango;
+            Storage.Instance.estadisticaGeneral.Peten = Storage.Instance.datosPeten;
+            return View(Storage.Instance.estadisticaGeneral);
         }
         public ActionResult EstadisticaPorHospital()
         {
@@ -53,8 +58,17 @@ namespace Proyecto1ED1.Controllers
         {
             return View();
         }
-        #endregion 
+        public ActionResult Simulacion()
+        {
+            return View("Simulaciones");
+        }
+        public ActionResult Hospitales()
+        {
+            return View();
+        }
+        #endregion
 
+        #region Registro
         [HttpPost]
         public ActionResult Registro(FormCollection collection)
         {
@@ -90,15 +104,15 @@ namespace Proyecto1ED1.Controllers
                 infoEstadisticas = "Capital";
 
             }
-            if ((collection["Departamento"] == "Quetzaltenango") || (collection["Departamento"] == "SanMarcos") || (collection["Departamento"] == "Retalhuleu") || (collection["Departamento"] == "Totonicapan") || (collection["Departamento"] == "Solola"))
+            if ((collection["Departamento"] == "Quetzaltenango") || (collection["Departamento"] == "SanMarcos") || (collection["Departamento"] == "Retalhuleu") || (collection["Departamento"] == "Totonicapán") || (collection["Departamento"] == "Sololá"))
             {
                 hospitalCorrespondiente = Storage.Instance.hospitalQuetzaltenango;
                 infoEstadisticas = "Quetzaltenango";
             }
-            if ((collection["Departamento"] == "Peten") || (collection["Departamento"] == "Quiche") || (collection["Departamento"] == "AltaVerapaz") || (collection["Departamento"] == "Izabal") || (collection["Departamento"] == "Huehuetenango"))
+            if ((collection["Departamento"] == "Petén") || (collection["Departamento"] == "Quiché") || (collection["Departamento"] == "AltaVerapaz") || (collection["Departamento"] == "Izabal") || (collection["Departamento"] == "Huehuetenango"))
             {
                 hospitalCorrespondiente = Storage.Instance.hospitalPeten;
-                infoEstadisticas = "Peten";
+                infoEstadisticas = "Petén";
             }
             if ((collection["Departamento"] == "Escuintla") || (collection["Departamento"] == "Suchitepequez") || (collection["Departamento"] == "Sacatepequez") || (collection["Departamento"] == "SantaRosa"))
             {
@@ -129,7 +143,7 @@ namespace Proyecto1ED1.Controllers
                 {
                     Storage.Instance.datosEscuintla.contagiadosIngresados++;
                 }
-                else if (infoEstadisticas == "Peten")
+                else if (infoEstadisticas == "Petén")
                 {
                     Storage.Instance.datosPeten.contagiadosIngresados++;
                 }
@@ -142,8 +156,6 @@ namespace Proyecto1ED1.Controllers
                 if (hospitalCorrespondiente.contagiadosCamilla < 10)
                 {
                     hospitalCorrespondiente.contagiadosCamilla++;
-
-
                     //Encontrar primer camilla libre y sacar su código. 
                     Cama camaDisponible = hospitalCorrespondiente.camillas.AllDataLikeList().Find((dato) =>
                     {
@@ -183,7 +195,7 @@ namespace Proyecto1ED1.Controllers
                 {
                     Storage.Instance.datosEscuintla.sospechososIngresados++;
                 }
-                else if (infoEstadisticas == "Peten")
+                else if (infoEstadisticas == "Petén")
                 {
                     Storage.Instance.datosPeten.sospechososIngresados++;
                 }
@@ -192,15 +204,13 @@ namespace Proyecto1ED1.Controllers
                     Storage.Instance.datosOriente.sospechososIngresados++;
                 }
                 #endregion
-
                 hospitalCorrespondiente.colaSospechosos.Insert(infoCola.prioridad, infoCola);
             }
             #endregion
-
             Storage.Instance.dataPacientes.Insert(newPatient.Nombre, newPatient.Apellido, newPatient.DPI_Partida, newPatient);
             return View("Index");
         }
-        
+
         public long definirPrioridad(string categoria)
         {
             ///Definicion por categoria
@@ -286,19 +296,9 @@ namespace Proyecto1ED1.Controllers
 
             return prioridad;
         }
-        
-        public ActionResult Simulacion()
-        {
-            return View("Simulaciones");
-        }
-
-        public ActionResult Hospitales()
-        {
-            return View();
-        }
+        #endregion
 
         #region ActionResults a menu de hospitales
-
         public ActionResult HospitalCapital()
         {
             Storage.Instance.hospitalSeleccionado = "HospitalCapital";
@@ -327,9 +327,6 @@ namespace Proyecto1ED1.Controllers
             return View("MenuHospital", Storage.Instance.hospitalOriente);
         }
 
-
-        #endregion
-
         public ActionResult CamasDisponibles()
         {
             switch (Storage.Instance.hospitalSeleccionado)
@@ -354,6 +351,7 @@ namespace Proyecto1ED1.Controllers
 
             }
         }
+        #endregion
 
         #region Estadisticas
         [HttpPost]
@@ -382,10 +380,12 @@ namespace Proyecto1ED1.Controllers
         }
         #endregion
 
-        public void PruebaPorHospital(Hospital hospital)
+        #region Simulaciones
+        public void PruebaPorHospital(Hospital hospital, Estadisticas data)
         {
             try
             {
+<<<<<<< HEAD
                 PrioridadCola pacienteSeleccionado = hospital.colaSospechosos.Peek();
                 long dpi = pacienteSeleccionado.dpi;
                 PatientInfo patient = Storage.Instance.dataPacientes.Busqueda("dpi", dpi.ToString())[0];
@@ -408,10 +408,27 @@ namespace Proyecto1ED1.Controllers
                     Storage.Instance.dataPacientes.SearchOneValue(dpi).Estado = "Sospechoso Negativo";
 
                 }
+=======
+                Storage.Instance.datos.sospechososPositivo++;
+                Storage.Instance.datos.contagiadosIngresados++;
+                data.sospechososPositivo++;
+                data.contagiadosIngresados++;
+                hospital.colaContagiados.Insert(pacienteSeleccionado.prioridad, pacienteSeleccionado);
+                hospital.colaSospechosos.Delete();
+                Response.Write("<script>alert('El paciente que era sospechoso y seguía en la cola ha resultado positivo para el Covid - 19')</script>");
+                // Cambiar estado?
+>>>>>>> 10faedb6700bd0219cca741671117ebf1a551476
             }
             catch (Exception)
             {
+<<<<<<< HEAD
                 Response.Write("<script>alert('No se puedo realizar la prueba, no hay sospechosos en la cola.')</script>");
+=======
+                Storage.Instance.datos.sospechososNegativo++;
+                data.sospechososNegativo++;
+                Response.Write("<script>alert('La prueba ha salido negativa')</script>");
+                // Cambiar estado a recuperado. 
+>>>>>>> 10faedb6700bd0219cca741671117ebf1a551476
             }
            
            
@@ -422,6 +439,7 @@ namespace Proyecto1ED1.Controllers
             switch (Storage.Instance.hospitalSeleccionado)
             {
                 case "HospitalCapital":
+<<<<<<< HEAD
                     PruebaPorHospital(Storage.Instance.hospitalCapital);
 
                     break;
@@ -444,17 +462,42 @@ namespace Proyecto1ED1.Controllers
                 case "HospitalOriente":
                     PruebaPorHospital(Storage.Instance.hospitalOriente);
                     
+=======
+                    PruebaPorHospital(Storage.Instance.hospitalCapital, Storage.Instance.datosCapital);
+                    Hospital hospital = Storage.Instance.hospitalCapital;
+                    int flag = 0;
                     break;
-               
-                    
 
+                case "HospitalQuetzaltenango":
+                    PruebaPorHospital(Storage.Instance.hospitalQuetzaltenango, Storage.Instance.datosQuetzaltenango);
+                    Hospital hospital2 = Storage.Instance.hospitalQuetzaltenango;
+                    int flag2 = 0;
+                    break;
+
+                case "HospitalPeten":
+                    PruebaPorHospital(Storage.Instance.hospitalPeten, Storage.Instance.datosPeten);
+                    Hospital hospital3 = Storage.Instance.hospitalPeten;
+                    int flag3 = 0;
+                    break;
+
+                case "HospitalEscuintla":
+                    PruebaPorHospital(Storage.Instance.hospitalEscuintla, Storage.Instance.datosEscuintla);
+                    Hospital hospital4 = Storage.Instance.hospitalEscuintla;
+                    int flag4 = 0;
+                    break;
+
+                case "HospitalOriente":
+                    PruebaPorHospital(Storage.Instance.hospitalOriente, Storage.Instance.datosOriente);
+                    Hospital hospital5 = Storage.Instance.hospitalOriente;
+                    int flag5 = 0;
+>>>>>>> 10faedb6700bd0219cca741671117ebf1a551476
+                    break;
             }
            
             return View("MenuHospital");
         }
 
-        
-
+        #endregion
 
         #region Busquedas
         [HttpPost]
