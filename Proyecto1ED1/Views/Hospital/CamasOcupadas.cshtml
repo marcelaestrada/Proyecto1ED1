@@ -1,8 +1,9 @@
 ﻿@model IEnumerable<Proyecto1ED1.Models.Model.Cama>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+
+<br />
+<h2>Camas ocupadas</h2>
+<br />
 <table class="table">
     <tr>
         <th>
@@ -17,21 +18,22 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Codigo)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.id)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Disponible)
-        </td>
-        <td>
-            @Html.ActionLink("Cambiar Estado", "CambiarEstado", new { id = item.Codigo }, new { @class = "btn btn-outline-dark btn-lg" }) 
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Codigo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Disponible)
+            </td>
+            <td>
+                @Html.ActionLink("Cambiar Estado", "CambiarEstado", new { id = item.Codigo }, new { @class = "btn btn-outline-dark btn-lg" })
+            </td>
+        </tr>
+    }
 
 </table>

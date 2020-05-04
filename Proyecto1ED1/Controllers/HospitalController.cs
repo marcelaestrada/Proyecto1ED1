@@ -530,7 +530,7 @@ namespace Proyecto1ED1.Controllers
             }
             catch (Exception)
             {
-                Response.Write("<script>alert('No se puedo realizar la prueba, no hay sospechosos en la cola.')</script>");
+                Response.Write("<script>alert('No se puede realizar la prueba, no hay sospechosos en la cola.')</script>");
 
             }
 
@@ -580,7 +580,7 @@ namespace Proyecto1ED1.Controllers
             pacientesEncontrados = null;
             PatientInfo estaVacio = new PatientInfo();
 
-            estaVacio.Nombre = "";
+            estaVacio.Nombre = "No hay coincidencias";
             estaVacio.Apellido = "";
             estaVacio.DPI_Partida = 000;
             estaVacio.Departamento = "";
