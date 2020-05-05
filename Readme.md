@@ -1,4 +1,4 @@
-# Atención en hospitales Covid-19
+# Atención en hospitales Covid-19 (Manual de Usuario)
 
 ## Introducción
 Actualmente, el mundo está afrontando una pandemia del virus Covid-19 registrado por primera vez en diciembre de 2019 en Wuhan, China. El primer caso del virus en Guatemala fue el 13 de marzo del presente año y desde entonces se han tomado medidas preventivas para evitar contagio masivo. Sin embargo, al ser un muy contagioso es inevitable la propagación entre ciudadanos. 
