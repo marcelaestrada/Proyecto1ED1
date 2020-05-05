@@ -1,10 +1,27 @@
 # Atención en hospitales Covid-19
 
 ## Introducción
+Actualmente, el mundo está afrontando una pandemia del virus Covid-19 registrado por primera vez en diciembre de 2019 en Wuhan, China. El primer caso del virus en Guatemala fue el 13 de marzo del presente año y desde entonces se han tomado medidas preventivas para evitar contagio masivo. Sin embargo, al ser un muy contagioso es inevitable la propagación entre ciudadanos. 
+Por lo tanto, se requiere de un sistema de salud eficiente que agilice la atención a contagiados y sospechosos para contener la propagación. Además, al ser un virus muy contagioso, es importante estar preparados e informados de los recursos hospitalarios que se tienen a disposición de los ciudadanos guatemaltecos. 
+Debido a esta situación, como estudiantes de segundo año de Ingeniería en Informática y Sistemas de la Universidad Rafael Landívar, se nos solicitó el desarrollo de una aplicación que conecte la información entre hospitales destinados a la cura y detención del virus, agilice la disponibilidad de camillas y lleve una estadística de la cantidad de pacientes, ya sea sospechosos o contagiados, que se han registrado generalmente y por hospital. 
+
 
 ## Requerimientos
+### Funcionales 
+* Se debe poder realizar un registro de los pacientes. 
+* El paciente deberá ser atendido en el hospital más cercano. 
+* Los pacientes confirmados y los sospechosos deben ser atendidos por aparte. 
+* Los pacientes deben ser asignados a una cola de espera específica basado en su ubicación, fecha y hora de ingreso. 
+* Los pacientes confirmados serán asignados a una camilla. 
+* Los pacientes sospechosos deberán pasar por una prueba para verificar si se descarta su caso o se re asigna su caso a contagiados. 
+* El sistema debe realizar una simulación del resultado de la prueba y de la asignación de camas. 
 
-## Instalación y Configuración 
+### No Funcionales
+* La data de cada paciente debe mantenerse almacenada en una estructura de árbol AVL
+* Para ordenar los pacientes se les debe asignar en estructuras de colas de prioridad. 
+* Las camas deben estar manejadas con una estructura de HashTable por hospital. 
+* Se deberá realizar un repositorio en git para manejar el control de versionado. 
+
 
 ## Funcionamiento 
 
@@ -80,7 +97,7 @@ Los mensajes que pueden mostrar la aplicación son:
 
 Como usuario puede navegar entra las diferentes secciones principales del programa en la parte superior presionando la funcionalidad a la que se quiere dirigir.
 
-### Solución de problemas y preguntas frecuentes 
+
 
 
 
