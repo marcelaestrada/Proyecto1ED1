@@ -217,7 +217,7 @@ namespace Proyecto1ED1.Controllers
             ///Definicion por categoria
             double porCategoria = 0.0;
 
-            if (categoria == "3eraEdad")
+            if (categoria == "TerceraEdad")
             {
                 porCategoria = 0.1;
             }

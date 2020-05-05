@@ -1,4 +1,5 @@
 ﻿@using Proyecto1ED1.Models
+@using Proyecto1ED1.Models.Enums
 @model Proyecto1ED1.Models.PatientInfo
 
 @{
@@ -106,18 +107,8 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Caracteristica, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                <div id="checkboxes1" style="display:inline-block">
-                    <input type="checkbox" id="Caracteristica" name="Caracteristica" value="RecienNacido">
-                    <label for="Caracteristica"> Recien Nacido </label><br>
-                    <input type="checkbox" id="Caracteristica" name="Caracteristica" value="Ninio_Joven">
-                    <label for="Caracteristica"> Niño/Joven </label><br>
-                </div>
-                <div id="checkboxes1" style="display:inline-block">
-                    <input type="checkbox" id="Caracteristica" name="Caracteristica" value="Adulto">
-                    <label for="Caracteristica"> Adulto </label><br>
-                    <input type="checkbox" id="Caracteristica" name="Caracteristica" value="3eraEdad">
-                    <label for="Caracteristica"> 3era edad </label><br>
-                </div>
+                @Html.DropDownListFor(model => model.Caracteristica, new SelectList(Enum.GetValues(typeof(Edades))),
+                "Seleccione edad", new { @class = "form-control" })
             </div>
         </div>
 

@@ -128,6 +128,7 @@
     <Compile Include="Models\Enums\Busqueda.cs" />
     <Compile Include="Models\Enums\Categoria.cs" />
     <Compile Include="Models\Enums\Departamentos.cs" />
+    <Compile Include="Models\Enums\Edades.cs" />
     <Compile Include="Models\Enums\Hospitales.cs" />
     <Compile Include="Models\Model\Cama.cs" />
     <Compile Include="Models\Model\EstadisticaGeneral.cs" />
