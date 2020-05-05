@@ -14,7 +14,7 @@
 
 ### 1.	Registro  
 
-* Imagen Registro
+<img src="Proyecto1ED1/imagesReadme/RegistroPacientes.png" width=800>
 
 En esta sección el usuario podrá ingresar los datos del paciente. Se le solicita el nombre, apellido, DPI o Cui (dependiendo de la edad del paciente), departamento de residencia, municipio, síntomas que presenta, la posible causa de contagio, 
 
@@ -24,16 +24,17 @@ Esta información se almacenará en la base de datos del programa para llevar re
 
 ### 2.	Búsquedas
 
-* Imagen Busquedas
+<img src="Proyecto1ED1/imagesReadme/MenuBusqueda.png" width=800>
 
 El presionar el botón de "Búsquedas" se desplegará una vista en la que podrá seleccionar el parámetro por el que quiere buscar a un pacientes (Nombre, apellido o DPI/Cui) y además deberá ingresar el valor buscado. Al pulsar Buscar, el programa le mostrará las coincidencias de búsqueda en el siguiente formato: 
 
-* Imágen búsquedas tablas. 
+<img src="Proyecto1ED1/imagesReadme/ResultadoDeBusqueda.png" width=800>
 
 En esta tabla se le mostrará toda la información ingresada en el Registro de pacientes y también el estado en el que se encuentra el paciente actualmente. Podrá observar pacientes en estado "contagiado", "sospechoso" y/o "recuperado".
 
 ### 3.	Estadísticas 
-* Estadisticas Generales Imagen
+
+<img src="Proyecto1ED1/imagesReadme/EstadisticaGeneral.png" width=800>
 
 En esta pestaña, el usuario observará la gráfica general de datos de ingreso y egreso de pacientes. Se muestran los datos de las personas contagiadas, sospechosas y recuperadas que han ingresado al sistema de hospitales. La cantidad de sospechosos es la suma de sospechosos contagiados y no contagiados, y los pacientes se suman a cada una de las categorías dependiendo de los resultados del examen. 
 
@@ -44,29 +45,32 @@ En este espacio podrá encontrar dos funcionalidades extra:
 **b)	Buscar por hospital **
 	En este separado puede seleccionar un hospital en específico del que se 	quieran ver los datos listados anteriormente, se mostrará una gráfica similar a la general, pero con los datos de un solo hospital (el 	seleccionado).
 
-* Imagen comparativa hospitales
+GraficaComparacionHospitales
+<img src="Proyecto1ED1/imagesReadme/GraficaComparacionHospitales.png" width=800>
+
 
 **Vista de gráfica comparativa de hospitales**
 
-* Imagen gráfica por hospital
+<img src="Proyecto1ED1/imagesReadme/GraficaPorHospital.png" width=800>
+
 
 ### 4.	Hospitales
 
 Al seleccionar esta opción, el programa le desplegará un menú de hospitales donde se encuentran los cinco disponibles y cada hospital mostrará tres opciones:
 
-* Imagen lista de hopitales
+<img src="Proyecto1ED1/imagesReadme/ListaDeHospitales.png" width=800>
 
-* Imagen menu hopitales
+<img src="Proyecto1ED1/imagesReadme/MenuHospital.png" width=800>
 
 **a)	Camas disponibles y ocupadas**
 Se muestra una tabla con las camillas que se encuentras ocupadas por un paciente y las que están disponibles, así como el código y el número de 	camilla en el hospital.
 
-* Imagen camas
+<img src="Proyecto1ED1/imagesReadme/Camas.png" width=800>
 
 **b)	Realizar una prueba **
 Al realizar una prueba, el programa analiza la probabilidad que tiene un 	paciente de estar contagiado y muestra el resultado de la prueba, para 	luego enviarlo a la cola de contagiados (o camilla si hubiera una 	disponible) o descartarlo. 
 
-* Imagen Alert con resultado prueba. 
+<img src="Proyecto1ED1/imagesReadme/Alerta.png" width=800>
 
 Los mensajes que pueden mostrar la aplicación son: 
 
