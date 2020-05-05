@@ -8,7 +8,7 @@
 
 ## Funcionamiento 
 
-<img src="imagesReadme/MenuPrincipal.png" width=200>
+<img src="Proyecto1ED1/imagesReadme/MenuPrincipal.png" width=800>
 
  **Menú principal:** Es la página principal del programa, en esta vista se encuentran las secciones disponibles. Cada una lo llevarán a un menú secundario con diferentes opciones.  
 
