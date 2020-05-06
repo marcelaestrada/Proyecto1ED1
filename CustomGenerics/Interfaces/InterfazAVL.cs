@@ -11,6 +11,6 @@ namespace CustomGenerics.Interfaces
     {
         void Insert(string name, string lastname, long cui, T value);
         void Delete(long value);
-        List<T> Busqueda (string parametro, string buscado);
+        List<T> Busqueda(string parametro, string buscado);
     }
 }

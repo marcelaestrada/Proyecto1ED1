@@ -9,7 +9,6 @@ namespace CustomGenerics.Structures
     public class AVLTree<T> : InterfazAVL<T> where T:IComparable
     {
         public NodeAVL<T> root;
-        public List<T> usuario = new List<T>();
 
         public AVLTree()
         {
@@ -134,7 +133,9 @@ namespace CustomGenerics.Structures
 
         public List<T> Busqueda(string parametro, string buscado)
         {
-            return preOrder(root, parametro, buscado);
+
+            List<T> usuario = new List<T>();
+            return preOrder(root, parametro, buscado, usuario);
         }
 
         public bool Search(long value)
@@ -188,8 +189,9 @@ namespace CustomGenerics.Structures
         }
 
         //metodos de recorrido 
-        public List<T> preOrder(NodeAVL<T> tree, string parametro, string buscado)
+        public List<T> preOrder(NodeAVL<T> tree, string parametro, string buscado, List<T> usuario)
         {
+            
             if (tree == null)
             {
                 return null;
@@ -217,8 +219,8 @@ namespace CustomGenerics.Structures
                         usuario.Add(tree.value);
                     }
                 }
-                preOrder(tree.Left, parametro, buscado);
-                preOrder(tree.Right, parametro, buscado);
+                preOrder(tree.Left, parametro, buscado, usuario);
+                preOrder(tree.Right, parametro, buscado, usuario);
             }
             return usuario;
         }
