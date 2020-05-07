@@ -23,7 +23,7 @@ namespace Proyecto1ED1.Controllers
             Storage.Instance.hospitalEscuintla.Nombre = "Hospital Escuintla";
             Storage.Instance.hospitalOriente.Nombre = "Hospital Oriente";
 
-            Hospital flag = Storage.Instance.hospitalCapital;
+          
             return View();
         }
         public ActionResult Registro()
@@ -158,6 +158,9 @@ namespace Proyecto1ED1.Controllers
                 if (hospitalCorrespondiente.contagiadosCamilla < 10)
                 {
                     hospitalCorrespondiente.contagiadosCamilla++;
+
+                    //Enviar datos del Paciente a camilla.
+
                     //Encontrar primer camilla libre y sacar su código. 
                     Cama camaDisponible = hospitalCorrespondiente.camillas.AllDataLikeList().Find((dato) =>
                     {
@@ -172,7 +175,7 @@ namespace Proyecto1ED1.Controllers
                     hospitalCorrespondiente.CamillasDisponibles = hospitalCorrespondiente.CamasDisponibles();
                     hospitalCorrespondiente.CamillasOcupadas = hospitalCorrespondiente.CamasOcupadas();
 
-
+                   
 
                 }
                 else

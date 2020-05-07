@@ -9,6 +9,7 @@ namespace Proyecto1ED1.Models.Model
     {
        
         public string Codigo { get; set; }
+        //Número de cama
         public int id { get; set; }
         public bool Disponible { get; set; }
         public PrioridadCola PacienteActual { get; set; }

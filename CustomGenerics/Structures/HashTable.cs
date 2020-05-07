@@ -34,7 +34,7 @@ namespace CustomGenerics.Structures
             int sumaDeElementos = 0;
 
             for (int i = 0; i < key.Length; i++)
-                sumaDeElementos += Convert.ToInt32(key[i]) * (i + 1);
+                sumaDeElementos += Convert.ToInt32(key[i]) * ((i + 1)*(i+1));
 
             int retorno = sumaDeElementos % arrayLength;
             return retorno;

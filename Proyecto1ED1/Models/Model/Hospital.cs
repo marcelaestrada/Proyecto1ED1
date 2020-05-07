@@ -17,8 +17,9 @@ namespace Proyecto1ED1.Models.Model
         public PriorityQueue<PrioridadCola> colaContagiados;
         public PriorityQueue<PrioridadCola> colaSospechosos;
 
-        //Guardar las camas que están disponibles. 
+         
         public List<Cama> CamillasDisponibles = new List<Cama>();
+
         public List<Cama> CamillasOcupadas = new List<Cama>();
 
 
@@ -30,6 +31,7 @@ namespace Proyecto1ED1.Models.Model
             this.colaContagiados = new PriorityQueue<PrioridadCola>();
             this.colaSospechosos = new PriorityQueue<PrioridadCola>();
 
+            //Inicializar las camillas
             for (int i = 0; i < 10; i++)
             {
                 Cama nuevaCama = new Cama(this.Nombre, i + 1);
