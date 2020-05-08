@@ -39,6 +39,8 @@ categoría del paciente (sospechoso o confirmado) y la característica (el rango
 
 Esta información se almacenará en la base de datos del programa para llevar registro de los ingresados. Adicionalmente, se enviará a los pacientes a una cola dependiendo de la categoría y se le asignará camilla a las personas contagiadas si estuvieran disponibles. 
 
+En el apartado de departamento y municipio se ingresa en el que fue registrado el paciente, esto para garantizar que se le envíe al hospital más cercano a su ubicación actual y no a la procedencia de su dpi. 
+
 ### 2.	Búsquedas
 
 <img src="Proyecto1ED1/imagesReadme/MenuBusqueda.png" width=800>
