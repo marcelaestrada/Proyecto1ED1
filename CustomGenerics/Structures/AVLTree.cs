@@ -122,7 +122,7 @@ namespace CustomGenerics.Structures
             }
             else if (Value2.CompareTo(tree.dpi) == -1)
             {
-                //return Search(Value2, tree.Right);
+                
                 return Search(Value2, tree.Left);
             }
             else
@@ -255,7 +255,10 @@ namespace CustomGenerics.Structures
 
 
         
-        //Delete Functions
+        /// <summary>
+        /// Eliminar un nodo
+        /// </summary>
+        /// <param name="value"></param>
         public void Delete(long value)
         {
             if (Search(value, root) != null)
@@ -270,35 +273,35 @@ namespace CustomGenerics.Structures
             if (actualRoot == null)
                 return null;
 
-            //To left sub tree
+            //A hijo izquierdo
             if (value.CompareTo(actualRoot.dpi) == -1)
             {
                 actualRoot.Left = Delete(actualRoot.Left, value);
             }
 
-            //To Right sub tree
+            //A hijo derecho
             else if (value.CompareTo(actualRoot.dpi) == 1)
             {
                 actualRoot.Right = Delete(actualRoot.Right, value);
             }
-            //The node is found
+            //Se encuentra el nodo
             else
             {
-                //just a right sub tree
+                //solo tiene sub arbol derecho. 
                 if (actualRoot.Left == null) return actualRoot.Right;
-                //just a right sub tree 
+                //solo tiene sub arbol izquierdo. 
                 else if (actualRoot.Right == null) return actualRoot.Left;
 
                 else
                 {
-                    //Remove from left sub tree.
+                    //Elimina del hijo izquierdo
                     if (actualRoot.Left.Height > actualRoot.Right.Height)
                     {
-                        //find the biggest right node from the left. 
-                        //sap values
+                        //Encontrar el nodo mas a la derecha del hijo izquierdo
+                        //Intercambiar valores
                         long sonValue = MostRight(actualRoot.Left);
                         actualRoot.dpi = sonValue;
-                        //find the last node of the left sub tree
+                        //Encuentra el ultimo nodo del izquierdo. 
                         actualRoot.Left = Delete(actualRoot.Left, sonValue);
                     }
 
@@ -315,14 +318,14 @@ namespace CustomGenerics.Structures
                 }
             }
 
-            // Re balance the tree
+            
             OverWriteBF(actualRoot);
 
             return Balance(actualRoot);
 
         }
 
-        //find the most left node
+        //Encontrar el nodo mas a la izquierda
         private long MostLeft(NodeAVL<T> node)
         {
             while (node.Left != null)
@@ -331,7 +334,7 @@ namespace CustomGenerics.Structures
             }
             return node.dpi;
         }
-        //find the most right node
+        //Encontrar el nodo mas a la derecha
         private long MostRight(NodeAVL<T> node)
         {
             while (node.Right != null)
@@ -343,6 +346,10 @@ namespace CustomGenerics.Structures
 
         #region Avl 
 
+        /// <summary>
+        /// Sobre escribe el factor de equilibrio
+        /// </summary>
+        /// <param name="node"></param>
         private void OverWriteBF(NodeAVL<T> node)
         {
             int leftHeight, rightHeight;
@@ -360,67 +367,27 @@ namespace CustomGenerics.Structures
 
         }
 
+        /// <summary>
+        /// metodo que re balancea la estructura
+        /// </summary>
+        /// <param name="node"></param>
+        /// <returns></returns>
         private NodeAVL<T> Balance(NodeAVL<T> node)
         {
             if (node.Fe == -2)
             {
-                if (node.Left.Fe <= 0) return LeftToLeft(node);
-                else return LeftToRight(node);
+                if (node.Left.Fe <= 0) return RotationRight(node);
+                else return DoubleRotationRight(node);
             }
             else if (node.Fe == 2)
             {
-                if (node.Right.Fe >= 0) return RightToRight(node);
-                else return RightToLeft(node);
+                if (node.Right.Fe >= 0) return RotationLeft(node);
+                else return DoubleRotationLeft(node); 
             }
 
             return node;
         }
-        private NodeAVL<T> LeftToLeft(NodeAVL<T> node)
-        {
-            return RotationToRight(node);
-        }
-        private NodeAVL<T> LeftToRight(NodeAVL<T> node)
-        {
-            node.Left = RotationToLeft(node.Left);
-            return LeftToLeft(node);
-        }
-        private NodeAVL<T> RightToRight(NodeAVL<T> node)
-        {
-            return RotationToLeft(node);
-        }
-        private NodeAVL<T> RightToLeft(NodeAVL<T> node)
-        {
-            node.Right = RotationToRight(node.Right);
-            return RightToRight(node);
-        }
-        private NodeAVL<T> RotationToLeft(NodeAVL<T> node)
-        {
-            NodeAVL<T> AuxParent = node.Right;
-            node.Right = AuxParent.Left;
-            AuxParent.Left = node;
-
-            OverWriteBF(node);
-            OverWriteBF(AuxParent);
-            return AuxParent;
-        }
-        private NodeAVL<T> RotationToRight(NodeAVL<T> node)
-        {
-            NodeAVL<T> AuxParent = node.Left;
-            node.Left = AuxParent.Right;
-            AuxParent.Right = node;
-
-            OverWriteBF(node);
-            OverWriteBF(AuxParent);
-            return AuxParent;
-        }
-
-       
-
-
-
-
-
-
+      
 
         #endregion
 
