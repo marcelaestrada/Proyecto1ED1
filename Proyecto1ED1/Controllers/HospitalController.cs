@@ -74,6 +74,7 @@ namespace Proyecto1ED1.Controllers
         [HttpPost]
         public ActionResult Registro(FormCollection collection)
         {
+
             //Si dpi existe, alertar e inflar la vista otra vez. 
             if (Storage.Instance.dataPacientes.Search(long.Parse(collection["DPI_Partida"])))
             {
