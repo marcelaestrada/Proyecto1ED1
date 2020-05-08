@@ -74,153 +74,173 @@ namespace Proyecto1ED1.Controllers
         [HttpPost]
         public ActionResult Registro(FormCollection collection)
         {
+            List<PatientInfo> comprobacionDPI = new List<PatientInfo>();
+            comprobacionDPI = Storage.Instance.dataPacientes.Busqueda("dpi", (collection["DPI_Partida"]));
 
-            //Si dpi existe, alertar e inflar la vista otra vez. 
-            if (Storage.Instance.dataPacientes.Search(long.Parse(collection["DPI_Partida"])))
+            if ((collection["DPI_Partida"].Length == 13))
             {
-                Response.Write("<script>alert('El DPI ingresado ya existe, intente ingresar otro paciente...')</script>");
-                return View("Registro");
-            }
-
-            PatientInfo newPatient = new PatientInfo();
-            Hospital hospitalCorrespondiente = new Hospital("Hospital");
-            PrioridadCola infoCola = new PrioridadCola();
-            string infoEstadisticas = "";
-
-            #region Informacion de registro de paciente
-            newPatient.Nombre = collection["Nombre"];
-            newPatient.Apellido = collection["Apellido"];
-            newPatient.DPI_Partida = long.Parse(collection["DPI_Partida"]);
-            newPatient.Departamento = collection["Departamento"];
-            newPatient.Municipio = collection["Municipio"];
-            newPatient.Sintomas = collection["Sintomas"];
-            newPatient.Contagio = collection["Contagio"];
-            newPatient.Categoria = collection["Categoria"];
-            newPatient.Caracteristica = collection["Caracteristica"];
-            newPatient.Estado = newPatient.Categoria;
-            #endregion
-
-            #region Informacion de registro para cola 
-            infoCola.nombre = newPatient.Nombre;
-            infoCola.apellido = newPatient.Apellido;
-            infoCola.dpi = newPatient.DPI_Partida;
-            infoCola.prioridad = definirPrioridad(newPatient.Caracteristica);
-            #endregion
-
-            #region Definicion de hospital correspondiente
-            if ((collection["Departamento"] == "Guatemala") || (collection["Departamento"] == "BajaVerapaz") || (collection["Departamento"] == "Chimaltenango") || (collection["Departamento"] == "ElProgreso"))
-            {
-                hospitalCorrespondiente = Storage.Instance.hospitalCapital;
-                infoEstadisticas = "Capital";
-
-            }
-            if ((collection["Departamento"] == "Quetzaltenango") || (collection["Departamento"] == "SanMarcos") || (collection["Departamento"] == "Retalhuleu") || (collection["Departamento"] == "Totonicapán") || (collection["Departamento"] == "Sololá"))
-            {
-                hospitalCorrespondiente = Storage.Instance.hospitalQuetzaltenango;
-                infoEstadisticas = "Quetzaltenango";
-            }
-            if ((collection["Departamento"] == "Petén") || (collection["Departamento"] == "Quiché") || (collection["Departamento"] == "AltaVerapaz") || (collection["Departamento"] == "Izabal") || (collection["Departamento"] == "Huehuetenango"))
-            {
-                hospitalCorrespondiente = Storage.Instance.hospitalPeten;
-                infoEstadisticas = "Petén";
-            }
-            if ((collection["Departamento"] == "Escuintla") || (collection["Departamento"] == "Suchitepequez") || (collection["Departamento"] == "Sacatepequez") || (collection["Departamento"] == "SantaRosa"))
-            {
-                hospitalCorrespondiente = Storage.Instance.hospitalEscuintla;
-                infoEstadisticas = "Escuintla";
-            }
-            if ((collection["Departamento"] == "Jalapa") || (collection["Departamento"] == "Jutiapa") || (collection["Departamento"] == "Chiquimula") || (collection["Departamento"] == "Zacapa"))
-            {
-                hospitalCorrespondiente = Storage.Instance.hospitalOriente;
-                infoEstadisticas = "Oriente";
-            }
-            #endregion
-
-            #region Envio a cola
-            if (newPatient.Categoria == "Contagiado")
-            {
-                Storage.Instance.datos.contagiadosIngresados++;
-                #region Agregar datos para estadisticas
-                if (infoEstadisticas == "Capital")
+                if (comprobacionDPI==null || comprobacionDPI.Count==0)
                 {
-                    Storage.Instance.datosCapital.contagiadosIngresados++;
-                }
-                else if (infoEstadisticas == "Quetzaltenango")
-                {
-                    Storage.Instance.datosQuetzaltenango.contagiadosIngresados++;
-                }
-                else if (infoEstadisticas == "Escuintla")
-                {
-                    Storage.Instance.datosEscuintla.contagiadosIngresados++;
-                }
-                else if (infoEstadisticas == "Petén")
-                {
-                    Storage.Instance.datosPeten.contagiadosIngresados++;
-                }
-                else if (infoEstadisticas == "Oriente")
-                {
-                    Storage.Instance.datosOriente.contagiadosIngresados++;
-                }
-                #endregion
-
-                if (hospitalCorrespondiente.contagiadosCamilla < 10)
-                {
-                    hospitalCorrespondiente.contagiadosCamilla++;
-
-                    //Enviar datos del Paciente a camilla.
-
-                    //Encontrar primer camilla libre y sacar su código. 
-                    Cama camaDisponible = hospitalCorrespondiente.camillas.AllDataLikeList().Find((dato) =>
+                    if ((long.Parse(collection["DPI_Partida"].Substring(9)) <= 2231)&&(long.Parse(collection["DPI_Partida"].Substring(9)) >= 0101))
                     {
-                        return (dato.Disponible) ? true : false;
-                    });
+                        PatientInfo newPatient = new PatientInfo();
+                        Hospital hospitalCorrespondiente = new Hospital("Hospital");
+                        PrioridadCola infoCola = new PrioridadCola();
+                        string infoEstadisticas = "";
 
-                    //Llamar al hashTable del hospital Correspondiente....
-                    //Hacer un search de la camilla con ese código y al objeto de retorno ingresarle el paciente.
-                    hospitalCorrespondiente.camillas.Search(camaDisponible.Codigo).PacienteActual = infoCola;
-                    hospitalCorrespondiente.camillas.Search(camaDisponible.Codigo).Disponible = false;
+                        #region Informacion de registro de paciente
+                        newPatient.Nombre = collection["Nombre"];
+                        newPatient.Apellido = collection["Apellido"];
+                        newPatient.DPI_Partida = long.Parse(collection["DPI_Partida"]);
+                        newPatient.Departamento = collection["Departamento"];
+                        newPatient.Municipio = collection["Municipio"];
+                        newPatient.Sintomas = collection["Sintomas"];
+                        newPatient.Contagio = collection["Contagio"];
+                        newPatient.Categoria = collection["Categoria"];
+                        newPatient.Caracteristica = collection["Caracteristica"];
+                        newPatient.Estado = newPatient.Categoria;
+                        #endregion
 
-                    hospitalCorrespondiente.CamillasDisponibles = hospitalCorrespondiente.CamasDisponibles();
-                    hospitalCorrespondiente.CamillasOcupadas = hospitalCorrespondiente.CamasOcupadas();
+                        #region Informacion de registro para cola 
+                        infoCola.nombre = newPatient.Nombre;
+                        infoCola.apellido = newPatient.Apellido;
+                        infoCola.dpi = newPatient.DPI_Partida;
+                        infoCola.prioridad = definirPrioridad(newPatient.Caracteristica);
+                        #endregion
 
-                   
+                        #region Definicion de hospital correspondiente
+                        if ((collection["Departamento"] == "Guatemala") || (collection["Departamento"] == "BajaVerapaz") || (collection["Departamento"] == "Chimaltenango") || (collection["Departamento"] == "ElProgreso"))
+                        {
+                            hospitalCorrespondiente = Storage.Instance.hospitalCapital;
+                            infoEstadisticas = "Capital";
 
+                        }
+                        if ((collection["Departamento"] == "Quetzaltenango") || (collection["Departamento"] == "SanMarcos") || (collection["Departamento"] == "Retalhuleu") || (collection["Departamento"] == "Totonicapán") || (collection["Departamento"] == "Sololá"))
+                        {
+                            hospitalCorrespondiente = Storage.Instance.hospitalQuetzaltenango;
+                            infoEstadisticas = "Quetzaltenango";
+                        }
+                        if ((collection["Departamento"] == "Petén") || (collection["Departamento"] == "Quiché") || (collection["Departamento"] == "AltaVerapaz") || (collection["Departamento"] == "Izabal") || (collection["Departamento"] == "Huehuetenango"))
+                        {
+                            hospitalCorrespondiente = Storage.Instance.hospitalPeten;
+                            infoEstadisticas = "Petén";
+                        }
+                        if ((collection["Departamento"] == "Escuintla") || (collection["Departamento"] == "Suchitepequez") || (collection["Departamento"] == "Sacatepequez") || (collection["Departamento"] == "SantaRosa"))
+                        {
+                            hospitalCorrespondiente = Storage.Instance.hospitalEscuintla;
+                            infoEstadisticas = "Escuintla";
+                        }
+                        if ((collection["Departamento"] == "Jalapa") || (collection["Departamento"] == "Jutiapa") || (collection["Departamento"] == "Chiquimula") || (collection["Departamento"] == "Zacapa"))
+                        {
+                            hospitalCorrespondiente = Storage.Instance.hospitalOriente;
+                            infoEstadisticas = "Oriente";
+                        }
+                        #endregion
+
+                        #region Envio a cola
+                        if (newPatient.Categoria == "Contagiado")
+                        {
+                            Storage.Instance.datos.contagiadosIngresados++;
+                            #region Agregar datos para estadisticas
+                            if (infoEstadisticas == "Capital")
+                            {
+                                Storage.Instance.datosCapital.contagiadosIngresados++;
+                            }
+                            else if (infoEstadisticas == "Quetzaltenango")
+                            {
+                                Storage.Instance.datosQuetzaltenango.contagiadosIngresados++;
+                            }
+                            else if (infoEstadisticas == "Escuintla")
+                            {
+                                Storage.Instance.datosEscuintla.contagiadosIngresados++;
+                            }
+                            else if (infoEstadisticas == "Petén")
+                            {
+                                Storage.Instance.datosPeten.contagiadosIngresados++;
+                            }
+                            else if (infoEstadisticas == "Oriente")
+                            {
+                                Storage.Instance.datosOriente.contagiadosIngresados++;
+                            }
+                            #endregion
+
+                            if (hospitalCorrespondiente.contagiadosCamilla < 10)
+                            {
+                                hospitalCorrespondiente.contagiadosCamilla++;
+
+                                //Enviar datos del Paciente a camilla.
+
+                                //Encontrar primer camilla libre y sacar su código. 
+                                Cama camaDisponible = hospitalCorrespondiente.camillas.AllDataLikeList().Find((dato) =>
+                                {
+                                    return (dato.Disponible) ? true : false;
+                                });
+
+                                //Llamar al hashTable del hospital Correspondiente....
+                                //Hacer un search de la camilla con ese código y al objeto de retorno ingresarle el paciente.
+                                hospitalCorrespondiente.camillas.Search(camaDisponible.Codigo).PacienteActual = infoCola;
+                                hospitalCorrespondiente.camillas.Search(camaDisponible.Codigo).Disponible = false;
+
+                                hospitalCorrespondiente.CamillasDisponibles = hospitalCorrespondiente.CamasDisponibles();
+                                hospitalCorrespondiente.CamillasOcupadas = hospitalCorrespondiente.CamasOcupadas();
+
+
+
+                            }
+                            else
+                            {
+                                hospitalCorrespondiente.colaContagiados.Insert(infoCola.prioridad, infoCola);
+                            }
+                        }
+                        else if (newPatient.Categoria == "Sospechoso")
+                        {
+                            Storage.Instance.datos.sospechososIngresados++;
+                            #region Agregar datos para estadisticas
+                            if (infoEstadisticas == "Capital")
+                            {
+                                Storage.Instance.datosCapital.sospechososIngresados++;
+                            }
+                            else if (infoEstadisticas == "Quetzaltenango")
+                            {
+                                Storage.Instance.datosQuetzaltenango.sospechososIngresados++;
+                            }
+                            else if (infoEstadisticas == "Escuintla")
+                            {
+                                Storage.Instance.datosEscuintla.sospechososIngresados++;
+                            }
+                            else if (infoEstadisticas == "Petén")
+                            {
+                                Storage.Instance.datosPeten.sospechososIngresados++;
+                            }
+                            else if (infoEstadisticas == "Oriente")
+                            {
+                                Storage.Instance.datosOriente.sospechososIngresados++;
+                            }
+                            #endregion
+                            hospitalCorrespondiente.colaSospechosos.Insert(infoCola.prioridad, infoCola);
+                        }
+                        #endregion
+                        Storage.Instance.dataPacientes.Insert(newPatient.Nombre, newPatient.Apellido, newPatient.DPI_Partida, newPatient);
+                        return View("Index");
+                    }
+                    else
+                    {
+                        Response.Write("<script>alert('El dpi ingresado no corresponde a ningún departamento')</script>");
+                        return View("Registro");
+                    }
                 }
                 else
                 {
-                    hospitalCorrespondiente.colaContagiados.Insert(infoCola.prioridad, infoCola);
+                    Response.Write("<script>alert('El DPI ingresado ya está registrado en el sistema, intente ingresar otro paciente...')</script>");
+                    return View("Registro");
                 }
+                
             }
-            else if (newPatient.Categoria == "Sospechoso")
+            else
             {
-                Storage.Instance.datos.sospechososIngresados++;
-                #region Agregar datos para estadisticas
-                if (infoEstadisticas == "Capital")
-                {
-                    Storage.Instance.datosCapital.sospechososIngresados++;
-                }
-                else if (infoEstadisticas == "Quetzaltenango")
-                {
-                    Storage.Instance.datosQuetzaltenango.sospechososIngresados++;
-                }
-                else if (infoEstadisticas == "Escuintla")
-                {
-                    Storage.Instance.datosEscuintla.sospechososIngresados++;
-                }
-                else if (infoEstadisticas == "Petén")
-                {
-                    Storage.Instance.datosPeten.sospechososIngresados++;
-                }
-                else if (infoEstadisticas == "Oriente")
-                {
-                    Storage.Instance.datosOriente.sospechososIngresados++;
-                }
-                #endregion
-                hospitalCorrespondiente.colaSospechosos.Insert(infoCola.prioridad, infoCola);
+                Response.Write("<script>alert('El DPI ingresado no es válido, inténtelo de nuevo')</script>");
+                return View("Registro");
             }
-            #endregion
-            Storage.Instance.dataPacientes.Insert(newPatient.Nombre, newPatient.Apellido, newPatient.DPI_Partida, newPatient);
-            return View("Index");
         }
 
         public long definirPrioridad(string categoria)
