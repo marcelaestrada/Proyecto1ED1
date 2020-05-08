@@ -74,6 +74,13 @@ namespace Proyecto1ED1.Controllers
         [HttpPost]
         public ActionResult Registro(FormCollection collection)
         {
+            //Si dpi existe, alertar e inflar la vista otra vez. 
+            if (Storage.Instance.dataPacientes.Search(long.Parse(collection["DPI_Partida"])))
+            {
+                Response.Write("<script>alert('El DPI ingresado ya existe, intente ingresar otro paciente...')</script>");
+                return View("Registro");
+            }
+
             PatientInfo newPatient = new PatientInfo();
             Hospital hospitalCorrespondiente = new Hospital("Hospital");
             PrioridadCola infoCola = new PrioridadCola();
@@ -361,8 +368,7 @@ namespace Proyecto1ED1.Controllers
             switch (Storage.Instance.hospitalSeleccionado)
             {
                 case "HospitalCapital":
-                    //Storage.Instance.hospitalCapital.CamillasOcupadas = Storage.Instance.hospitalCapital.CamasOcupadas();
-                    var flag = Storage.Instance.hospitalCapital.CamillasOcupadas;
+              
                     return View("CamasOcupadas", Storage.Instance.hospitalCapital.CamillasOcupadas );
 
                 case "HospitalQuetzaltenango":
