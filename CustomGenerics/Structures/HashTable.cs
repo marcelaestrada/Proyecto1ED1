@@ -29,6 +29,11 @@ namespace CustomGenerics.Structures
         }
 
 
+        /// <summary>
+        /// Metodo que devuelve el indice en el que se encuentra un elemento, basado en su llave
+        /// </summary>
+        /// <param name="key"></param>
+        /// <returns></returns>
         private int Hash(string key)
         {
             int sumaDeElementos = 0;
@@ -40,6 +45,12 @@ namespace CustomGenerics.Structures
             return retorno;
         }
 
+        /// <summary>
+        /// Incerta un valor basado en su key - llave tipo string
+        /// y su T value
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="value"></param>
         public void Insert(S key, T value)
         {
             datos++;
@@ -50,9 +61,15 @@ namespace CustomGenerics.Structures
             }
         }
 
+        //Devuelve un boolean que indica si la llave existe o no
         public bool KeyExist(S key)
             => (Search(key) != null) ? true : false;
 
+
+        /// <summary>
+        /// Elimina un elemento de la tabla pasando como parametro su llave tipo string
+        /// </summary>
+        /// <param name="key"></param>
         public void Delete(S key)
         {
             datos--;
@@ -60,7 +77,7 @@ namespace CustomGenerics.Structures
 
             foreach (var item in dataArray[arrayIndex])
             {
-                //Use a custom object whith own compareTo method. 
+                
                 if (item.CompareTo(key.ToString()) == 0)
                 {
                     dataArray[arrayIndex].Remove(item);
@@ -69,6 +86,11 @@ namespace CustomGenerics.Structures
             }
         }
 
+        /// <summary>
+        /// Hace la busqueda de un elemento de llave Key tipo String
+        /// </summary>
+        /// <param name="key"></param>
+        /// <returns></returns>
         public T Search(S key)
         {
             int Index = Hash(key.ToString());
@@ -86,6 +108,10 @@ namespace CustomGenerics.Structures
 
         }
 
+        /// <summary>
+        /// Recorre toda la tabla y devuelve una lista con la data
+        /// </summary>
+        /// <returns></returns>
         public List<T> AllDataLikeList()
         {
             List<T> retorno = new List<T>();

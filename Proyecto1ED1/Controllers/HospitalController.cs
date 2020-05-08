@@ -535,11 +535,10 @@ namespace Proyecto1ED1.Controllers
                         hospital.colaSospechosos.Delete();
                     }
                     Response.Write("<script>alert('El paciente que era sospechoso y seguía en la cola ha resultado positivo para el Covid - 19')</script>");
-                    //TODO: Revisar si es necesario este cambio de estado....
+                 
                     NodeAVL<PatientInfo> nodoPaciente = Storage.Instance.dataPacientes.SearchOneValue(dpi);
                     nodoPaciente.value.Estado = "No Recuperado";
 
-                    NodeAVL<PatientInfo> nodoPacienteFlag = Storage.Instance.dataPacientes.SearchOneValue(dpi);
 
                 }
                 else
@@ -553,7 +552,7 @@ namespace Proyecto1ED1.Controllers
                     NodeAVL<PatientInfo> nodoPaciente = Storage.Instance.dataPacientes.SearchOneValue(dpi);
                     nodoPaciente.value.Estado = "Sospechoso Negativo";
 
-                    NodeAVL<PatientInfo> nodoPacienteFlag = Storage.Instance.dataPacientes.SearchOneValue(dpi);
+                   
 
                 }
 
